@@ -88,6 +88,23 @@ userRouter.put('/:id', async (req, res) => {
 })
 
 // delete user
-userRouter.delete('/id', (req, res) => {})
+userRouter.delete('/:id', async (req, res) => {
+    let id = req.params.id
+    try {
+        await User.findByIdAndDelete(id)
+        res.status(200)
+        res.json({
+            status: "success",
+            message: "The user was succesfully deleted"
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "The user could not be deleted!"
+        })
+    }
+})
 
 module.exports = userRouter
