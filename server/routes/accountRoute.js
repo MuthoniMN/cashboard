@@ -36,7 +36,23 @@ accountRouter.post('/add', async (req, res) => {
 })
 
 // get all accounts
-accountRouter.get("/", (req, res) => {})
+accountRouter.get("/", async (req, res) => {
+    let id = req.query.user
+    try {
+        let user = await User.findById(id)
+        res.status(200);
+        res.json({
+            accounts: user.accounts
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "Couldn't get the user's accounts"
+        })
+    }    
+})
 
 // get a account
 accountRouter.get('/:id', (req, res) => {})
