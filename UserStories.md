@@ -1,0 +1,17 @@
+- As a Cashboard user, I want to signup, login and logout of my account
+- As a Cashboard user, I want to have a list of all my income sources
+- As a Cashboard user, I want to have a list of all my expenses
+- As a Cashboard user, I want to have a list of all my savings
+- As a Cashboard user, I want to have a list of all my investments
+- As a Cashboard user, I want to have a list of all my bank accounts
+- As a Cashboard user, I want to see a graphical representation of how I spend my money
+- As a Cashboard user, I want to see a graphical representation of all my expenses
+- As a Cashboard user, I want to see a graphical representation of my saving goals
+- As a Cashboard user, I want to see a graphical representation of my investments
+- As a Cashboard user, I want to track my bank account balance
+- As a Cashboard user, I want to view my annual reports
+- As a Cahboard user, I want to view my bi-annually reports,
+- As a Cashboard user, I want to view my monthly reports
+- As a Cashboard user, I want to view my weekly reports
+- As a Cashboard user, I want to view my daily reports.
+- As a Cashboard user, I want to change from light to dark mode
