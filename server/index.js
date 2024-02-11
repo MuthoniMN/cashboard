@@ -2,6 +2,14 @@ const express = require('express')
 const app = express()
 const path = require('path')
 
+// routers
+const userRouter = require('./routes/userRoute')
+const accountRouter = require('./routes/accountRoute')
+const incomeRouter = require('./routes/incomeRoute')
+const expenseRouter = require('./routes/expenseRoute')
+const savingsRouter = require('./routes/savingsRoute')
+const investmentRouter = require('./routes/investmentRoute')
+
 // loading static files such as css and images
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -19,6 +27,13 @@ app.get('/', (req, res) => {
 })
 
 // routers
+app.use("/user", userRouter)
+app.use("/account", accountRouter)
+app.use("/income", incomeRouter)
+app.use("/expense", expenseRouter)
+app.use("/savings", savingsRouter)
+app.use("/investment", investmentRouter)
+
 
 //  404 Errors
 app.all("*", (req,res) => {
