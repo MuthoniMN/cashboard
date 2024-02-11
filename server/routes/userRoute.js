@@ -34,7 +34,22 @@ userRouter.post('/add', async (req, res) => {
 })
 
 // get user
-userRouter.get('/:id', (req, res) => {})
+userRouter.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        let user = await User.findById(id)
+
+        res.status(200)
+        res.json(user)
+    } catch (error) {
+        console.error(error)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "We couldn't find the user. Please try again"
+        })
+    }
+})
 
 //  update user
 userRouter.put('/:id', (req, res) => {})
