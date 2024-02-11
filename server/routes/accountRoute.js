@@ -55,7 +55,42 @@ accountRouter.get("/", async (req, res) => {
 })
 
 // get a account
-accountRouter.get('/:id', (req, res) => {})
+accountRouter.get('/:id', async (req, res) => {
+    let userId = req.query.user
+    let id = req.params.id
+    let account
+
+    try {
+        let user = await User.findById(userId)
+        console.log(user)
+
+        user.accounts.forEach(a => {
+            if(a._id == id){
+                account = a
+            }
+        })
+        if(account){
+            res.status(200)
+            res.json({
+                account: account
+            })
+        }else{
+            res.status(500)
+            res.json({
+                status: "error",
+                mesage: "Sorry! We couldn't find the account"
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+        res.json({
+            status: "error",
+            mesage: "Account not available"
+        })
+    }
+    
+})
 
 // update a account
 accountRouter.put('/:id', (req, res) => {})
