@@ -36,7 +36,27 @@ incomeRouter.post('/add', async (req, res) => {
 })
 
 // get all income sources
-incomeRouter.get("/", (req, res) => {})
+incomeRouter.get("/", async (req, res) => {
+    let id = req.query.user
+    
+    try {
+        let user = await User.findById(id)
+        console.log(user)
+
+        res.status(200)
+        res.json({
+            income: user.income
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "Income not available"
+        })
+    }
+
+})
 
 // get a income
 incomeRouter.get('/:id', (req, res) => {})
