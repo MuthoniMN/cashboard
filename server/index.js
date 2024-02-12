@@ -12,6 +12,8 @@ const investmentRouter = require('./routes/investmentRoute')
 
 // loading static files such as css and images
 app.use(express.static(path.join(__dirname, 'public')))
+// parsing the request body
+app.use(express.json())
 
 const dotenv = require('dotenv')
 dotenv.config({path: ".env"})
