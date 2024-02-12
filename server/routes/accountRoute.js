@@ -135,6 +135,42 @@ accountRouter.put('/:id', async(req, res) => {
 })
 
 // delete a account
-accountRouter.delete('/:id', (req, res) => {})
+accountRouter.delete('/:id', async (req, res) => {
+    let userId = req.query.user
+    let id = req.params.id
+    let account = {}
+
+    try {
+        let user = await User.findById(userId)
+        let accounts = user.accounts
+
+        accounts.forEach((a, i) => {
+            if(a._id == id){
+                account = a
+                accounts = [...accounts.splice(0, i), ...accounts.splice(i+1)]
+            }
+        })
+
+        await User.findByIdAndUpdate(userId, {
+            $set: {
+                accounts: accounts
+            }
+        })
+
+        res.status(200)
+        res.json({
+            status: "success",
+            message: "Account successfully deleted"
+        })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "Account not deleted"
+        })
+    }
+})
 
 module.exports = accountRouter
