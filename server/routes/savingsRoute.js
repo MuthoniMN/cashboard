@@ -48,7 +48,28 @@ savingsRouter.get("/", async(req, res) => {
 })
 
 // get a saving goal
-savingsRouter.get('/:id', (req, res) => {})
+savingsRouter.get('/:id', async(req, res) => {
+    let userId = req.query.user
+    let id = req.params.id
+
+    try {
+        let user = await User.findById(userId)
+
+        let saving = user.savings.filter(saving => saving._id == id)  
+
+        res.status(200)
+        res.json({
+            saving: saving
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+        res.json({
+            status: "error",
+            message: "Saving not found!"
+        })
+    }
+})
 
 // update a saving goal
 savingsRouter.put('/:id', (req, res) => {})
