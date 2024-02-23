@@ -7,24 +7,21 @@ accountRouter.post('/add', async (req, res) => {
     let userId = req.query.user
 
     try {
-        let user = await User.findById(userId)
         let account = {
             name: req.body.name,
             desc: req.body.desc,
             currentAmount: req.body.currentAmount
         }
-        let accounts = user.accounts
-        accounts.push(account)
 
         await User.findByIdAndUpdate(userId, {
-            $set: {
-                accounts: accounts
+            $push: {
+                accounts: account
             }
         })
         let updatedUser = await User.findById(userId)
 
         res.status(200)
-        res.json(updatedUser)
+        res.json({accounts: updatedUser.accounts})
     } catch (err) {
         console.error(err)
         res.status(500)
