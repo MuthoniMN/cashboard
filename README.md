@@ -20,3 +20,5 @@ It is a personal finance tool that enables users to understand how they spend th
 - Mongoose
 
 ## What I Learnt
+1. How to encrypt a password
+2. How to work with embedded documents in MongoDB
