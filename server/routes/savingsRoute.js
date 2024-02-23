@@ -29,7 +29,23 @@ savingsRouter.post('/add', async(req, res) => {
 })
 
 // get all saving goals
-savingsRouter.get("/", (req, res) => {})
+savingsRouter.get("/", async(req, res) => {
+    let userId = req.query.user;
+    
+    try {
+        let user = await User.findById(userId)
+
+        res.status(200);
+        res.json({savings: user.savings})
+    } catch (err) {
+        console.error(err);
+        res.status(500);
+        res.json({
+            status: 'error',
+            message: "Savings not found."
+        })
+    }
+})
 
 // get a saving goal
 savingsRouter.get('/:id', (req, res) => {})
