@@ -9,13 +9,10 @@ incomeRouter.post('/add', async (req, res) => {
 
     try {
         const user = await User.findById(id)
-        const income = user.income
-
-        income.push(newIncome)
 
         await User.findByIdAndUpdate(id, {
-            $set: {
-                income: income
+            $push: {
+                income: newIncome
             }
         })
 
