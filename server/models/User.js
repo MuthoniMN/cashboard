@@ -8,6 +8,12 @@
  * Reports -  each report should have a downloadable pdf, date issued, title
  */
 const mongoose = require('mongoose');
+const savingSchema = require('./Saving');
+const expenseSchema = require('./Expense');
+const IncomeSchema = require('./Income');
+const AccountSchema = require('./Account');
+const InvestmentSchema = require('./Investment');
+const ReportSchema = require('./Report');
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -29,114 +35,12 @@ const UserSchema = new mongoose.Schema({
         type: String, 
         default: 'KSH'
     },
-    accounts: [
-        {
-            name: {
-                type: String,
-                required: true
-            },
-            desc: {
-                type: String
-            },
-            currentAmount: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    income: [
-        {
-            source: {
-                type: String,
-                required: true
-            },
-            payDate: {
-                type: Number,
-                required: true
-            },
-            category: {
-                type: String,
-            },
-            amount: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    expenses: [
-        {
-            desc: {
-                type: String,
-                required: true
-            },
-            category: {
-                type: String
-            },
-            date: {
-                type: Date,
-                required: true
-            },
-            account: {
-                type: String,
-                required: true
-            },
-            amount: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    savings: [
-        {
-            desc: {
-                type: String,
-                required: true
-            },
-            goal: {
-                type: String
-            },
-            lastModified: {
-                type: Date,
-                required: true
-            },
-            currentAmount: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    investments: [
-        {
-            desc: {
-                type: String,
-                required: true
-            },
-            lastModified: {
-                type: Date,
-                required: true
-            },
-            currentAmount: {
-                type: Number,
-                required: true
-            }
-        }
-    ],
-    reports: [
-        {
-            title: {
-                type: String,
-                required: true
-            },
-            link: {
-                type: String,
-                required: true
-            },
-            dateIssued: {
-                type: Date,
-                required: true
-            }
-        }
-    ]
+    accounts: [AccountSchema],
+    income: [IncomeSchema],
+    expenses: [expenseSchema],
+    savings: [savingSchema],
+    investments: [InvestmentSchema],
+    reports: [ReportSchema]
 })
 
 module.exports = mongoose.model('User', UserSchema)
