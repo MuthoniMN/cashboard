@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
                 required: true
             },
             payDate: {
-                type: Date,
+                type: Number,
                 required: true
             },
             category: {
