@@ -68,12 +68,27 @@ investmentRouter.get('/:id',  async(req, res) => {
 })
 
 // update a investment
-investmentRouter.put('/:id', (req, res) => {
+investmentRouter.put('/:id', async(req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
+    let amount = req.body.amount;
 
     try {
+        await User.updateOne({
+            _id: userId, 
+            "investments._id": id
+        }, {
+            $inc: {
+                "investments.$.currentAmount": amount
+            }
+        })
+
+        let user = await User.findById(userId);
+
         res.status(200)
+        res.json({
+            investments: user.investments
+        })
     } catch (error) {
         console.error(err)
         res.status(500)
