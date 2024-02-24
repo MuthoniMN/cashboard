@@ -91,31 +91,23 @@ accountRouter.get('/:id', async (req, res) => {
 
 // update a account
 accountRouter.put('/:id', async(req, res) => {
-    let userId = req.query.user
-    let id = req.params.id
-    let account = {}
+    let userId = req.query.user;
+    let id = req.params.id;
+    let amount = req.body.amount;
 
     try {
-        let user = await User.findById(userId)
-        let accounts = user.accounts
         
-        accounts.forEach((a, i) => {
-            if(a._id == id){
-                account.name = req.body.name || a.name
-                account.desc = req.body.desc || a.desc
-                account.currentAmount = req.body.currentAmount || a.currentAmount
-                console.log(account)
-
-                accounts[i] = account
-            }
-        })
-
-        await User.findByIdAndUpdate(userId, {
+        await User.updateOne({
+            _id: userId,
+            "savings._id": id
+        }, {
             $set: {
-                accounts: accounts
+                "savings.currentAmount": amount
             }
         })
 
+        let user = await User.findById(userId)
+        let account = user.accounts.filter(account => account._id == id)
         res.status(200)
         res.json({
             account: account
