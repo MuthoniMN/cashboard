@@ -72,7 +72,31 @@ savingsRouter.get('/:id', async(req, res) => {
 })
 
 // update a saving goal
-savingsRouter.put('/:id', (req, res) => {})
+savingsRouter.put('/:id', async(req, res) => {
+    let userId = req.query.user;
+    let id = req.params.id;
+    let amount = req.body.amount
+
+    try {
+        await User.updateOne({
+            _id: userId, 
+            "savings._id": id
+        }, {
+            $inc: {
+                "savings.$.currentAmount": amount
+            }
+        })
+
+        let user = await User.findById(userId);
+
+        res.status(200);
+        res.json({
+            savings: user.savings
+        })
+    } catch (err) {
+        
+    }
+})
 
 // delete a saving goal
 savingsRouter.delete('/:id', (req, res) => {})
