@@ -5,7 +5,7 @@ incomeController.addIncome = async (req, res) => {
     const id = req.query.user
     const newIncome = req.body
 
-    try {
+    try { 
         await User.findByIdAndUpdate(id, {
             $push: {
                 income: newIncome
@@ -66,6 +66,30 @@ incomeController.getIncome = async (req, res) => {
         res.json({
             status: "error",
             message: "Income not available"
+        })
+    }
+}
+
+incomeController.deleteIncome = async(req, res) => {
+    let userId = req.query.user;
+    let id = req.params.id;
+
+    try {
+        let user = await User.findById(userId)
+
+        user.income.id(id).deleteOne();
+
+        res.status(200)
+        res.json({
+            status: "success",
+            message: "The income was succefully deleted!"
+        })
+    } catch (err) {
+        console.error(err)
+        res.status(500)
+        res.json({
+            status: "success",
+            message: "The income was not deleted!"
         })
     }
 }
