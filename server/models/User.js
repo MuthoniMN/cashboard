@@ -41,6 +41,6 @@ const UserSchema = new mongoose.Schema({
     savings: [savingSchema],
     investments: [InvestmentSchema],
     reports: [ReportSchema]
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('User', UserSchema)
