@@ -1,165 +1,20 @@
-const express = require('express')
+const express = require('express');
+const accountController = require('../controllers/account');
 const accountRouter = express.Router();
-const User = require('../models/User')
 
 // create account
-accountRouter.post('/add', async (req, res) => {
-    let userId = req.query.user
-
-    try {
-        let account = {
-            name: req.body.name,
-            desc: req.body.desc,
-            currentAmount: req.body.currentAmount
-        }
-
-        await User.findByIdAndUpdate(userId, {
-            $push: {
-                accounts: account
-            }
-        })
-        let updatedUser = await User.findById(userId)
-
-        res.status(200)
-        res.json({accounts: updatedUser.accounts})
-    } catch (err) {
-        console.error(err)
-        res.status(500)
-        res.json({
-            status: "error",
-            message: "Account was not added"
-        })
-    }
-})
+accountRouter.post('/add', accountController.addAccount)
 
 // get all accounts
-accountRouter.get("/", async (req, res) => {
-    let id = req.query.user
-    try {
-        let user = await User.findById(id)
-        res.status(200);
-        res.json({
-            accounts: user.accounts
-        })
-    } catch (error) {
-        console.error(error)
-        res.status(500)
-        res.json({
-            status: "error",
-            message: "Couldn't get the user's accounts"
-        })
-    }    
-})
+accountRouter.get("/", accountController.getAllAccounts)
 
 // get a account
-accountRouter.get('/:id', async (req, res) => {
-    let userId = req.query.user
-    let id = req.params.id
-    let account
-
-    try {
-        let user = await User.findById(userId)
-        console.log(user)
-
-        user.accounts.forEach(a => {
-            if(a._id == id){
-                account = a
-            }
-        })
-        if(account){
-            res.status(200)
-            res.json({
-                account: account
-            })
-        }else{
-            res.status(404)
-            res.json({
-                status: "error",
-                mesage: "Sorry! We couldn't find the account"
-            })
-        }
-    } catch (err) {
-        console.error(err)
-        res.status(500)
-        res.json({
-            status: "error",
-            mesage: "Account not available"
-        })
-    }
-    
-})
+accountRouter.get('/:id', accountController.getAccount)
 
 // update a account
-accountRouter.put('/:id', async(req, res) => {
-    let userId = req.query.user;
-    let id = req.params.id;
-    let amount = req.body.amount;
-
-    try {
-        
-        await User.updateOne({
-            _id: userId,
-            "savings._id": id
-        }, {
-            $set: {
-                "savings.currentAmount": amount
-            }
-        })
-
-        let user = await User.findById(userId)
-        let account = user.accounts.filter(account => account._id == id)
-        res.status(200)
-        res.json({
-            account: account
-        })
-
-    } catch (error) {
-        console.error(error)
-        res.status(500)
-        res.json({
-            status: "error",
-            message: "Account not updated"
-        })
-    }
-})
+accountRouter.put('/:id', accountController.updateAccount)
 
 // delete a account
-accountRouter.delete('/:id', async (req, res) => {
-    let userId = req.query.user
-    let id = req.params.id
-    let account = {}
-
-    try {
-        let user = await User.findById(userId)
-        let accounts = user.accounts
-
-        accounts.forEach((a, i) => {
-            if(a._id == id){
-                account = a
-                accounts = [...accounts.splice(0, i), ...accounts.splice(i+1)]
-            }
-        })
-
-        await User.findByIdAndUpdate(userId, {
-            $set: {
-                accounts: accounts
-            }
-        })
-
-        res.status(200)
-        res.json({
-            status: "success",
-            message: "Account successfully deleted"
-        })
-
-    } catch (err) {
-        console.error(err)
-        res.status(500)
-        res.json({
-            status: "error",
-            message: "Account not deleted"
-        })
-    }
-})
+accountRouter.delete('/:id', accountController.deleteAccount)
 
 module.exports = accountRouter
