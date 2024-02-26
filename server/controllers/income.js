@@ -53,12 +53,11 @@ incomeController.getIncome = async (req, res) => {
 
     try {
         let user = await User.findById(userId);
-        let income = user.income;
-        let result = income.filter(i => i._id == id)
+        let income = user.income.id(id)
 
         res.status(200)
         res.json({
-            income: result
+            income: income
         })
     } catch (err) {
         console.error(err)
