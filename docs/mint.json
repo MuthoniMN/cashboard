@@ -1,0 +1,43 @@
+{
+  "name": "Mintlify",
+  "logo": {
+    "light": "/logo/light-logo.png",
+    "dark": "/logo/dark-logo.png"
+  },
+  "favicon": "/logo/favicon.ico",
+  "colors": {
+    "primary": "#59C3C3",
+    "secondary": "#52489C",
+    "light": "#fafafa",
+    "dark": "#1F2421"
+  },
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://1tc7vihvbit.typeform.com/to/pZJ31XZB"
+  },
+  "anchors": [
+    {
+      "name": "API Components",
+      "icon": "rectangle-terminal",
+      "color": "#f59f0b",
+      "url": "api-components"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "API Components",
+      "pages": ["api-playground/overview", "api-playground/configuration"]
+    },
+    {
+      "group": "Settings",
+      "pages": ["settings/global", "settings/page"]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/MuthoniMN/cashboard"
+  }
+}
