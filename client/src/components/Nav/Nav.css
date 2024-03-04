@@ -15,6 +15,9 @@ nav>div>button{
     color: #1D70A2;
     transition: all 200ms ease-in-out;
 }
+.secondary>a{
+    color: #1D70A2;
+}
 
 .secondary:hover{
     color: #fafafa;
