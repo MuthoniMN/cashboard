@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const cors = require('cors')
 
 // routers
 const userRouter = require('./routes/userRoute')
@@ -9,11 +10,14 @@ const incomeRouter = require('./routes/incomeRoute')
 const expenseRouter = require('./routes/expenseRoute')
 const savingsRouter = require('./routes/savingsRoute')
 const investmentRouter = require('./routes/investmentRoute')
+const authRouter = require('./routes/auth')
 
 // loading static files such as css and images
 app.use(express.static(path.join(__dirname, 'public')))
 // parsing the request body
 app.use(express.json())
+// allow for requests from the frontend
+app.use(cors())
 
 const dotenv = require('dotenv')
 dotenv.config({path: ".env"})
@@ -35,6 +39,7 @@ app.use("/income", incomeRouter)
 app.use("/expense", expenseRouter)
 app.use("/savings", savingsRouter)
 app.use("/investment", investmentRouter)
+app.use("/auth", authRouter)
 
 
 //  404 Errors
