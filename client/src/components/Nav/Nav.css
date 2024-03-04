@@ -1,0 +1,22 @@
+nav{
+    width: 96vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav>div>button{
+    margin-left: 12px;
+}
+
+.secondary{
+    border: 2px solid #1D70A2;
+    background-color: transparent;
+    color: #1D70A2;
+    transition: all 200ms ease-in-out;
+}
+
+.secondary:hover{
+    color: #fafafa;
+    background-color: #59C3C3;
+}
