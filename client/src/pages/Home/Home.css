@@ -1,0 +1,23 @@
+.hero{
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section.flex{
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin: 48px 0;
+}
+
+section.flex>div{
+    width: 300px;
+    text-align: left;
+}
+
+button>a{
+    color: #fafafa;
+}
