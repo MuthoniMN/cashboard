@@ -1,0 +1,15 @@
+form.regular-form{
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid #1F2421;
+    padding: 24px 16px;
+    border-radius: 16px;
+}
+
+.regular-form>.inputContainer{
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+}
