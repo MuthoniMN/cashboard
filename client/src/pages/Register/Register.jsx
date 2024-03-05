@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
-import {Link, redirect} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import validate from "../../utils/validate";
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ const Register = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
+    const navigate = useNavigate()
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -26,7 +27,8 @@ const Register = () => {
             
             setSuccess("Registration Successful! Please login")
 
-            return redirect('/login', 200)
+            navigate('/login')
+            
         } catch (error) {
             console.error(error);
             setError("Registration failed!")
