@@ -8,6 +8,10 @@ import { AuthContext,} from './contexts/AuthContext';
 import { useContext } from 'react';
 import MainLayout from './components/MainLayout/MainLayout';
 import Accounts from './pages/Accounts/Accounts';
+import Income from './pages/Income/Income';
+import Expenses from './pages/Expenses/Expenses';
+import Savings from './pages/Savings/Savings';
+import Investments from './pages/Investments/Investments';
 
 function App() {
   const {token }= useContext(AuthContext)
@@ -32,6 +36,22 @@ function App() {
         {
           path: '/accounts',
           element: isAuthenticated ? <Accounts /> : <Login />
+        },
+        {
+          path: '/income',
+          element: isAuthenticated ? <Income /> : <Login />
+        },
+        {
+          path: '/expenses',
+          element: isAuthenticated ? <Expenses /> : <Login />
+        },
+        {
+          path: '/savings',
+          element: isAuthenticated ? <Savings /> : <Login />
+        },
+        {
+          path: '/investments',
+          element: isAuthenticated ? <Investments /> : <Login />
         }
       ]
     }
