@@ -1,5 +1,5 @@
-import Navigation from './components/Navigation/Navigation'
-import ContentLayout from './components/ContentLayout/ContentLayout'
+import Navigation from '../Navigation/Navigation'
+import ContentLayout from '../ContentLayout/ContentLayout'
 
 function MainLayout() {
   const navMenu = [
