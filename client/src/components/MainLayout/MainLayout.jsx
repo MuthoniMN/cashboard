@@ -9,7 +9,7 @@ function MainLayout() {
       text: 'Dashboard'
     },
     {
-      link: '/account',
+      link: '/accounts',
       text: 'Account'
     },
     {
@@ -17,7 +17,7 @@ function MainLayout() {
       text: 'Income'
     },
     {
-      link: '/expense',
+      link: '/expenses',
       text: 'Expense'
     },
     {

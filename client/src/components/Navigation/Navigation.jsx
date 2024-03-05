@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Navigation.css';
+import { Link } from 'react-router-dom';
 
 const Navigation = ({links}) => {
     const [navOpen, setNavOpen] = useState(false)
@@ -14,7 +15,7 @@ const Navigation = ({links}) => {
             <ul>
                 {links.map(link => (
                     <li>
-                        <a href={link.link}>{link.text}</a>
+                    <Link to={link.link}>{link.text}</Link>
                     </li>
                 ))}
             </ul>
