@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Nav.css'
 const Nav = () => {
     return (
-        <nav>
+        <nav className='landingNav'>
             <img src="/logos/light-logo.png" alt="Cashboard App Logo" width={100} height={100} />
             <div>
                 <button className='secondary'>
