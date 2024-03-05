@@ -27,7 +27,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -35,6 +35,7 @@ h1 {
   line-height: 1.1;
 }
 
+input[type=submit],
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -47,14 +48,35 @@ button {
   cursor: pointer;
   transition: background-color 0.25s;
 }
+input[type=submit]:hover, 
 button:hover {
   background-color: #1D70A2;
 }
+input[type=submit]:focus,
+input[type=submit]:focus-visible,
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input{
+  font-family: inherit;
+  padding: 3px;
+}
+
+input:focus{
+  outline: none;
+}
+
+.error{
+  color: red;
+  font-weight: 500;
+}
+
+.success{
+  color: rgb(61, 255, 2);
+  font-weight: 500;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
