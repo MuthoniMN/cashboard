@@ -1,5 +1,6 @@
 import Navigation from '../Navigation/Navigation'
 import ContentLayout from '../ContentLayout/ContentLayout'
+import { Outlet } from "react-router-dom";
 
 function MainLayout() {
   const navMenu = [
@@ -32,7 +33,7 @@ function MainLayout() {
   return (
     <>
       <ContentLayout>
-        <h1>Cashboard App</h1>
+        <Outlet />
       </ContentLayout>
       <Navigation links={navMenu} />
     </>

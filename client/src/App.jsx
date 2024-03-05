@@ -6,6 +6,8 @@ import Login from "./pages/Login/Login";
 import Dashboard from './pages/Dashboard/Dashboard'
 import { AuthContext,} from './contexts/AuthContext';
 import { useContext } from 'react';
+import MainLayout from './components/MainLayout/MainLayout';
+import Accounts from './pages/Accounts/Accounts';
 
 function App() {
   const {token }= useContext(AuthContext)
@@ -23,6 +25,15 @@ function App() {
     {
       path: '/login',
       element: <Login />
+    },
+    {
+      element: <MainLayout />,
+      children: [
+        {
+          path: '/accounts',
+          element: isAuthenticated ? <Accounts /> : <Login />
+        }
+      ]
     }
   ])
 
