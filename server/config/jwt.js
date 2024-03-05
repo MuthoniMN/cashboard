@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
 
-const secret_key = process.env.SECRET_KEY
+const secret_key = "CASH_A$$_BAG$"
 
 const generateToken = (user) => {
-    return jwt.sign({id: user._id, email: user.email}, secret_key, {
+    return jwt.sign({id: user._id, username: user.username}, secret_key, {
         expiresIn: '1h'
     })
 }
