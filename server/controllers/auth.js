@@ -1,5 +1,5 @@
-import { generateToken } from "../config/jwt";
-import User from "../models/User";
+const generateToken =  require("../config/jwt");
+const User = require('../models/User');
 
 const authController = {};
 

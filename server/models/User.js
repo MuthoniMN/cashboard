@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema({
     reports: [ReportSchema]
 }, { timestamps: true })
 
-userSchema.methods.verifyPassword = async function (password) {
+UserSchema.methods.verifyPassword = async function (password) {
     const user = this;
     const isMatch = await bcrypt.compare(password, user.password);
     return isMatch;
