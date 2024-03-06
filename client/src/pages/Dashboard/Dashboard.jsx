@@ -2,6 +2,7 @@ import React from "react";
 import "./Dashboard.css";
 import Navigation from "../../components/Navigation/Navigation";
 import ContentLayout from "../../components/ContentLayout/ContentLayout";
+import Header from "../../components/Header/Header";
 
 const Dashboard = () => {
     const navMenu = [
@@ -34,6 +35,7 @@ const Dashboard = () => {
       <>
         <Navigation links={navMenu}/>
         <ContentLayout>
+          <Header title='Welcome back!' desc='Overview of your financial tracker.' />
             <h1>Dashboard</h1>
         </ContentLayout>
       </>
