@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navigation.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Navigation = ({links}) => {
-    const [navOpen, setNavOpen] = useState(false)
+    const [navOpen, setNavOpen] = useState(false);
+    const { setCurrentUser, setToken} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    function logout() {
+        localStorage.removeItem("token");
+        setCurrentUser(null);
+        setToken(null);
+        navigate('/login')
+    }
 
     return (
         <div>
@@ -20,7 +30,7 @@ const Navigation = ({links}) => {
                 ))}
             </ul>
 
-            <button>Log Out</button>
+            <button onClick={logout}>Log Out</button>
         </nav>
         </div>
         
