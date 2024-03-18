@@ -14,7 +14,7 @@ const Home = () => {
                 <h1>Take charge of your finances today!</h1>
                 <p>We help you figure out where your money goes by tracking your finances</p>
                 <button>
-                    <Link to={'/register'}>Get Started Now &gt; </Link>
+                    <Link to={'/register'}>Get Started Now</Link>
                 </button>
             </section>
             <section>
@@ -41,7 +41,7 @@ const Home = () => {
                 <h1>Ready to start your personal finance journey?</h1>
                 <p>Sign up today and start tracking your finances</p>
                 <button>
-                    <Link to={'/register'}>Get Started Now &gt; </Link>
+                    <Link to={'/register'}>Get Started Now</Link>
                 </button>
             </section>
         </>
