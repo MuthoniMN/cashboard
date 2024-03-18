@@ -11,7 +11,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
-    const { setToken } = useContext(AuthContext)
+    const { setToken, setCurrentUser } = useContext(AuthContext)
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -25,6 +25,7 @@ const Login = () => {
         try {
             const res = await axios.post('http://localhost:5000/auth/login', user)
             setSuccess("Login Successful!")
+            setCurrentUser(res.data.user)
             setToken(res.data.token)
             localStorage.setItem("token", res.data.token )
             navigate('/')
@@ -52,7 +53,7 @@ const Login = () => {
                         <input type="password" name="password" id="password" placeholder="Secure Pa$$word" onChange={(e) => setUser({...user, password: e.target.value})} />
                     </div>
                     <p className={error ? 'error' : 'success'}>{error || success}</p>
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="Login" />
                 </form>
             </section>
         </>

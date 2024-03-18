@@ -21,7 +21,7 @@ const Register = () => {
             setError("Please enter a strong password")
             return;
         }
-//"Amin56der"
+//"Amin56der" "11Manifest55"
         try {
             const data = await axios.post("http://localhost:5000/user/add", user)
             
