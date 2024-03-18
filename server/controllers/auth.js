@@ -24,7 +24,8 @@ authController.login = async function (req, res) {
     res.status(200)
     res.send({
         status: 'successful',
-        token: token
+        token: token,
+        user: user
     })
 }
 
