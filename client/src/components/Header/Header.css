@@ -36,3 +36,59 @@ header div>*{
     justify-content: center;
     align-items: center;
 }
+
+header select{
+    appearance: none;
+    outline: none;
+    border: 3px solid #646cffaa;
+    padding: 6px 12px;
+    margin: 12px;
+}
+
+header .changeCurrency{
+    width: 200px;
+    background-color: #E5A4CB;
+    padding: 12px;
+    position: absolute;
+    top: 55px;
+    left: 70%;
+}
+
+header .changeCurrency label{
+    font-weight: bold;
+}
+
+header .changeCurrency input[type="text"]{
+    background: #8f39854b;
+    color: #fafafa;
+    border: none;
+    padding: 6px 3px;
+    margin: 4px 0 0;
+}
+
+header .changeCurrency input[type="submit"]{
+    margin: 12px 0;
+    background: #8F3985;
+}
+
+header .changeCurrency input[type="submit"]:hover{
+    box-shadow: 1px 1px 2px 1px #1f242186;
+}
+
+.toast{
+    position: absolute;
+    color: #fafafa;
+    font-weight: bold;
+    width: 200px;
+    padding: 12px 24px;
+    left: 80%;
+    top: 840%;
+}
+
+.toastSuccess{
+    background: rgb(92, 236, 49);
+}
+
+.toastError{
+    background: red;
+}
