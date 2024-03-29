@@ -19,7 +19,8 @@ const expenseSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true
-    }
+    },
+    currency: String
 })
 
 module.exports = expenseSchema

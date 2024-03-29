@@ -15,7 +15,8 @@ const IncomeSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true
-    }
+    },
+    currency: String
 })
 
 module.exports = IncomeSchema

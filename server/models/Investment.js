@@ -12,7 +12,8 @@ const InvestmentSchema = new mongoose.Schema({
     currentAmount: {
         type: Number,
         required: true
-    }
+    },
+    currency: String
 });
 
 module.exports = InvestmentSchema;

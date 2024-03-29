@@ -11,7 +11,8 @@ const AccountSchema = new mongoose.Schema({
         currentAmount: {
             type: Number,
             required: true
-        }
+        },
+        currency: String
 })
 
 module.exports = AccountSchema;
