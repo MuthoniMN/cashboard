@@ -7,6 +7,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+    localStorage.removeItem('token');
     return (
         <>
             <Nav />

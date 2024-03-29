@@ -14,8 +14,8 @@ import Savings from './pages/Savings/Savings';
 import Investments from './pages/Investments/Investments';
 
 function App() {
-  const {token }= useContext(AuthContext)
-  const isAuthenticated = token !== null
+  const { currentUser }= useContext(AuthContext)
+  const isAuthenticated = currentUser !== null
 
   const router = createBrowserRouter([
     {
