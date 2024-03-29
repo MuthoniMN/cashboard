@@ -17,6 +17,10 @@ header>div+div>div{
     gap: 4px;
 }
 
+header>div:first-of-type{
+    align-items: start;
+}
+
 header>div+div, 
 header>div+div>div{
     flex-direction: row;
@@ -80,7 +84,7 @@ header .changeCurrency input[type="submit"]:hover{
     color: #fafafa;
     font-weight: bold;
     width: 200px;
-    padding: 12px 24px;
+    padding:12px 24px;
     left: 80%;
     top: 840%;
 }
