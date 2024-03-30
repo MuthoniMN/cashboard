@@ -13,7 +13,10 @@ const InvestmentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    currency: String
+    currency: String,
+    category: {
+        type: String
+    },
 });
 
 module.exports = InvestmentSchema;

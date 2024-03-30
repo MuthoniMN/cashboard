@@ -16,7 +16,10 @@ const savingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    currency: String
+    currency: String,
+    category: {
+        type: String
+    },
 })
 
 module.exports = savingSchema
