@@ -15,7 +15,6 @@ const Header = ({title, desc}) => {
         async function listCurrency(){
             let c = await getCurrencies();
             setCurrencies([...Object.keys(c), 'KSH']);
-            console.log(currencies)
         }
 
         listCurrency();
@@ -35,7 +34,9 @@ const Header = ({title, desc}) => {
             }
         }
 
-        changeCurrency();
+        // changeCurrency();
+
+        return () => changeCurrency;
     }, [currency])
     
     return (
