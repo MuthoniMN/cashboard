@@ -13,6 +13,7 @@ import Expenses from './pages/Expenses/Expenses';
 import Savings from './pages/Savings/Savings';
 import Investments from './pages/Investments/Investments';
 import AddExpense from './pages/AddExpense/AddExpense';
+import AddAccount from './pages/AddAccount/AddAccount';
 
 function App() {
   const { currentUser }= useContext(AuthContext)
@@ -50,6 +51,10 @@ function App() {
         {
           path: '/expenses/add',
           element: isAuthenticated ? <AddExpense /> : <Login />,
+        },
+        {
+          path: '/accounts/add',
+          element: isAuthenticated ? <AddAccount /> : <Login />,
         },
         {
           path: '/savings',
