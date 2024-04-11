@@ -1,0 +1,36 @@
+.categories{
+    position: absolute;
+    top: 0;
+    left: 74%;
+    bottom: 0;
+    padding: 75px 24px 24px;
+    width: 300px;
+    background: #59c3c315;
+}
+
+.categoriesContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.barContainer{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.bar{
+    height: 4px;
+    background: #1D70A2;
+    padding: 0;
+    margin: 0;
+}
+
+.category{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
