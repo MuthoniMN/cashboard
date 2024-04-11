@@ -8,7 +8,8 @@ accountController.addAccount = async (req, res) => {
         let account = {
             name: req.body.name,
             desc: req.body.desc,
-            currentAmount: req.body.currentAmount
+            currentAmount: req.body.currentAmount,
+            currency: req.body.currency
         }
 
         await User.findByIdAndUpdate(userId, {
