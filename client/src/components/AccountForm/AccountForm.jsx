@@ -4,9 +4,10 @@ import validate from "../../utils/validate";
 import axios from 'axios';
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import updateCurrentUser from "../../utils/updateUser";
 
 const AccountForm = () => {
-    const {currentUser} = useContext(AuthContext);
+    const {currentUser, setCurrentUser} = useContext(AuthContext);
     const [account, setAccount] = useState({});
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
@@ -17,7 +18,7 @@ const AccountForm = () => {
         setError("");
         setSuccess("");
 
-        if(validate.isEmpty(account.name, account.desc, account.amount)){
+        if(validate.isEmpty(account.name, account.desc, account.currentAmount)){
             setError("Please fill all the fields!")
             return;
         }
@@ -27,6 +28,9 @@ const AccountForm = () => {
             
             setSuccess("Account added successfully!")
 
+            let updated = await updateCurrentUser(currentUser._id);
+            console.log(updated)
+            setCurrentUser(updated);
             navigate('/accounts')
             
         } catch (error) {
@@ -46,7 +50,7 @@ const AccountForm = () => {
             </div>
             <div>
                 <label htmlFor='amount'>Current Amount: </label>
-                <input type='number' id='amount' value={account.amount} onChange={(e) => setAccount( {...account, amount: e.target.value})} />
+                <input type='number' id='amount' value={account.amount} onChange={(e) => setAccount( {...account, currentAmount: e.target.value})} />
             </div>
             <p className={error ? 'error' : 'success'}>{error || success}</p>
 
