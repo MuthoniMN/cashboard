@@ -12,10 +12,12 @@ import Income from './pages/Income/Income';
 import Expenses from './pages/Expenses/Expenses';
 import Savings from './pages/Savings/Savings';
 import Investments from './pages/Investments/Investments';
+import AddExpense from './pages/AddExpense/AddExpense';
 
 function App() {
   const { currentUser }= useContext(AuthContext)
   const isAuthenticated = currentUser !== null
+  console.log(isAuthenticated);
 
   const router = createBrowserRouter([
     {
@@ -44,6 +46,10 @@ function App() {
         {
           path: '/expenses',
           element: isAuthenticated ? <Expenses /> : <Login />
+        },
+        {
+          path: '/expenses/add',
+          element: isAuthenticated ? <AddExpense /> : <Login />,
         },
         {
           path: '/savings',
