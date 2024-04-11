@@ -1,0 +1,14 @@
+table{
+    width: 100%;
+}
+
+table td{
+    padding: 4px 0;
+    border: 2px solid #59C3C3;
+}
+
+table th{
+    background: #8F3985;
+    color: #fafafa;
+    font-weight: bold;
+}
