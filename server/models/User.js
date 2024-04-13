@@ -14,6 +14,7 @@ const IncomeSchema = require('./Income');
 const AccountSchema = require('./Account');
 const InvestmentSchema = require('./Investment');
 const ReportSchema = require('./Report');
+const TransactionSchema = require('./Transaction');
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -40,7 +41,8 @@ const UserSchema = new mongoose.Schema({
     expenses: [expenseSchema],
     savings: [savingSchema],
     investments: [InvestmentSchema],
-    reports: [ReportSchema]
+    reports: [ReportSchema],
+    transactions: [TransactionSchema]
 }, { timestamps: true })
 
 
