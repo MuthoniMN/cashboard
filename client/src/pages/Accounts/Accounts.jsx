@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import './Accounts.css'
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import {FaPen, FaTrash} from "react-icons/fa6";
+import {FaTrash} from "react-icons/fa6";
 import deleteProperty from '../../utils/delete';
 import updateCurrentUser from '../../utils/updateUser';
 
