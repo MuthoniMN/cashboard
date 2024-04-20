@@ -9,6 +9,10 @@ const IncomeSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    account: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
     },
