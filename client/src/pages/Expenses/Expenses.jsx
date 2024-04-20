@@ -14,7 +14,9 @@ const Expenses = () => {
     const categories = [];
 
     expenses.forEach(expense => {
-        let index = categories.indexOf(expense.category);
+        let index = categories.findIndex(category => category.name === expense.category);
+        console.log(expense.category)
+        console.log(index)
         if(index === -1){
             categories.push({
                 name: expense.category,
