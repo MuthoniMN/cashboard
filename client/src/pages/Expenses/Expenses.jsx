@@ -63,7 +63,7 @@ const Expenses = () => {
                         <td>{expense.category}</td>
                         <td>{expense.currency + " " + expense.amount}</td>
                         <td>
-                            <button onClick={() => deleteExpense(expense._id)}>
+                            <button className="deleteButton" onClick={() => deleteExpense(expense._id)}>
                                 <FaTrash />
                             </button>
                         </td>

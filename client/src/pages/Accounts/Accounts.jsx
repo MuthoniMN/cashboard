@@ -38,7 +38,7 @@ const Accounts = () => {
                     <td>{account.desc}</td>
                     <td>{account.currency + " " + account.currentAmount}</td>
                     <td>
-                        <button onClick={() => deleteAccount(account._id)}>
+                        <button className="deleteButton" onClick={() => deleteAccount(account._id)}>
                             <FaTrash />
                         </button>
                     </td>
