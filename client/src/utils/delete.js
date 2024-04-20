@@ -1,15 +1,11 @@
 import axios from "axios";
-import updateCurrentUser from '../../utils/updateUser';
 
 export default async function deleteProperty(url){
     try {
-        await axios.delete(url);
+        const res = await axios.delete(url);
         console.log('deleted');
 
-        let user = await updateCurrentUser(currentUser._id);
-
-        setCurrentUser(user);
-        console.log(currentUser);
+        return res.data.user;
     } catch (err) {
         console.error(err);
     }
