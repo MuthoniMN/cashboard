@@ -89,10 +89,10 @@ accountController.updateAccount = async(req, res) => {
         
         await User.updateOne({
             _id: userId,
-            "savings._id": id
+            "accounts._id": id
         }, {
             $set: {
-                "savings.currentAmount": amount
+                "accounts.$.currentAmount": amount
             }
         })
 
@@ -118,8 +118,11 @@ accountController.deleteAccount = async (req, res) => {
     let id = req.params.id
 
     try {
-        let user = await User.findById(userId);
-        user.accounts.id(id),deleteOne();
+        await User.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { accounts: { _id: id} } },
+            { new: true }
+        )
 
         res.status(200)
         res.json({
