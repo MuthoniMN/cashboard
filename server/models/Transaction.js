@@ -6,7 +6,10 @@ const TransactionSchema = new mongoose.Schema({
             required: true
         },
         typeId: {
-            type: mongoose.Types.ObjectId
+            type: String
+        },
+        account: {
+            type: String
         },
         amount: {
             type: Number,
