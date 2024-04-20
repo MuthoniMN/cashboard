@@ -5,7 +5,7 @@ incomeController.addIncome = async (req, res) => {
     const id = req.query.user
     const newIncome = req.body
 
-    try { 
+    try {
         // adding new income
         await User.findByIdAndUpdate(id, {
             $push: {
@@ -97,15 +97,16 @@ incomeController.getIncome = async (req, res) => {
     }
 }
 
-incomeController.deleteIncome = async(req, res) => {
+incomeController.deleteIncome = async (req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
 
     try {
-        let user = await User.findById(userId)
-
-        user.income.id(id).deleteOne();
-
+        await User.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { income: { _id: id} } },
+            { new: true }
+        )
         res.status(200)
         res.json({
             status: "success",
