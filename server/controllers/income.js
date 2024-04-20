@@ -6,11 +6,39 @@ incomeController.addIncome = async (req, res) => {
     const newIncome = req.body
 
     try { 
+        // adding new income
         await User.findByIdAndUpdate(id, {
             $push: {
                 income: newIncome
             }
         })
+
+        //updating account
+        await User.updateOne({
+            _id: id,
+            "accounts._id": newIncome.account
+        }, {
+            $inc: {
+                "accounts.$.currentAmount": newIncome.amount
+            }
+        })
+
+        // getting the income id
+        let user = await User.findById(id);
+        let incomeId = user.income[user.income.length - 1]._id;
+
+        // adding transaction
+        await User.findByIdAndUpdate(id, {
+            $push: {
+                transactions: {
+                    type: 'income',
+                    typeId: incomeId,
+                    account: newIncome.account,
+                    timestamp: newIncome.date,
+                    amount: newIncome.amount
+                }
+            }
+        });
 
         const updated = await User.findById(id)
         res.status(201)
