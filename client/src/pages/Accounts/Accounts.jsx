@@ -30,7 +30,6 @@ const Accounts = () => {
                 <th>Name</th>
                 <th>Desc</th>
                 <th>Balance</th>
-                <th>Edit</th>
                 <th>Delete</th>
             </tr>
             {accounts.map(account => (
@@ -38,11 +37,6 @@ const Accounts = () => {
                     <td>{account.name}</td>
                     <td>{account.desc}</td>
                     <td>{account.currency + " " + account.currentAmount}</td>
-                    <td>
-                        <Link to={`/accounts/edit/${account._id}`}>
-                            <FaPen />
-                        </Link>
-                    </td>
                     <td>
                         <button onClick={() => deleteAccount(account._id)}>
                             <FaTrash />
