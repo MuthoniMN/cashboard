@@ -3,11 +3,22 @@ import './Accounts.css'
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import {FaPen, FaTrash} from "react-icons/fa6";
+import deleteProperty from '../../utils/delete';
+import updateCurrentUser from '../../utils/updateUser';
 
 const Accounts = () => {
-    const {currentUser} = useContext(AuthContext);
-    console.log(currentUser)
-    const [accounts, setAccounts] = useState(currentUser.accounts);
+    const {currentUser, setCurrentUser} = useContext(AuthContext);
+    const accounts = currentUser.accounts;
+
+    async function deleteAccount(id){
+        await deleteProperty(`http://localhost:5000/account/${id}?user=${currentUser._id}`);
+
+        let user = await updateCurrentUser(currentUser._id);
+
+        setCurrentUser(user);
+        console.log(currentUser);
+    }
     return (
         <>
         <Header title='Your Accounts' desc='An overview of all your accounts' />
@@ -27,6 +38,16 @@ const Accounts = () => {
                     <td>{account.name}</td>
                     <td>{account.desc}</td>
                     <td>{account.currency + " " + account.currentAmount}</td>
+                    <td>
+                        <Link to={`/accounts/edit/${account._id}`}>
+                            <FaPen />
+                        </Link>
+                    </td>
+                    <td>
+                        <button onClick={() => deleteAccount(account._id)}>
+                            <FaTrash />
+                        </button>
+                    </td>
                 </tr>
             ))}
          </table>
