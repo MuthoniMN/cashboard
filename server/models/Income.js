@@ -6,7 +6,7 @@ const IncomeSchema = new mongoose.Schema({
         required: true
     },
     payDate: {
-        type: Number,
+        type: Date,
         required: true
     },
     account: {
