@@ -34,7 +34,7 @@ incomeController.addIncome = async (req, res) => {
                     type: 'income',
                     typeId: incomeId,
                     account: newIncome.account,
-                    timestamp: newIncome.date,
+                    timestamp: newIncome.payDate,
                     amount: newIncome.amount
                 }
             }
