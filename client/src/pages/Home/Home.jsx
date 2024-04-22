@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
     localStorage.removeItem('token');
     return (
-        <>
+        <section style={{overflow: 'scroll', margin: "0 auto", padding: "12px 0", height: '100vh'}}>
             <Nav />
             <section className="hero">
                 <h1>Take charge of your finances today!</h1>
@@ -45,7 +45,7 @@ const Home = () => {
                     <Link to={'/register'}>Get Started Now</Link>
                 </button>
             </section>
-        </>
+        </section>
     )
 }
 
