@@ -6,7 +6,7 @@ nav.navMenu{
     height: 96vh;
     padding: 12px;
     justify-content: space-between;
-    background-color: #e5a4cb9f;
+    background-color: #59c3c352;
     border-radius: 0 24px 24px 0;
     transition: all 200ms ease-in-out;
 }
