@@ -1,5 +1,6 @@
 nav.landingNav{
-    width: 96vw;
+    width: 97vw;
+    padding: 0 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
