@@ -8,18 +8,11 @@ const savingSchema = new mongoose.Schema({
     goal: {
         type: String
     },
-    lastModified: {
-        type: Date,
-        required: true
-    },
     currentAmount: {
         type: Number,
         required: true
     },
-    currency: String,
-    category: {
-        type: String
-    },
-})
+    currency: String
+}, { timestamps: true })
 
 module.exports = savingSchema
