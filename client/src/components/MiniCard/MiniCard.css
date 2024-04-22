@@ -1,0 +1,23 @@
+.summary-card{
+    border: 1px solid #1D70A2;
+    margin: 0 0 12px;
+    border-radius: 12px 12px 0 0;
+}
+
+.summary-card > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1D70A2;
+    color: #fafafa;
+    border-radius: 10px 10px 0 0;
+}
+.summary-card > div > *{
+    margin: 0;
+    padding: 8px;
+}
+
+.summary-card h2{
+    margin: 0;
+    padding: 8px;
+}
