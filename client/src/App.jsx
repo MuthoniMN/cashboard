@@ -16,6 +16,7 @@ import AddExpense from './pages/AddExpense/AddExpense';
 import AddAccount from './pages/AddAccount/AddAccount';
 import AddIncome from './pages/AddIncome/AddIncome';
 import AddSaving from './pages/AddSaving/AddSaving';
+import EditSaving from './pages/EditSaving/EditSaving';
 
 function App() {
   const { currentUser }= useContext(AuthContext)
@@ -65,6 +66,10 @@ function App() {
         {
           path: '/savings/add',
           element: isAuthenticated ? <AddSaving /> : <Login />,
+        },
+        {
+          path: '/savings/edit/:id',
+          element: isAuthenticated ? <EditSaving /> : <Login />,
         },
         {
           path: '/savings',
