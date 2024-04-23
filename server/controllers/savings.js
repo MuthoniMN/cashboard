@@ -1,9 +1,12 @@
 const User = require('../models/User');
 const savingsController = {};
 
+const { dbConn } = require('../config/db');
+const { default: mongoose } = require('mongoose');
+
 savingsController.addSavings = async (req, res) => {
     let id = req.query.user;
-    let saving = { ...req.body, lastModified: new Date() }
+    let saving = { ...req.body }
 
     try {
         // add saving
@@ -71,45 +74,55 @@ savingsController.getSaving = async (req, res) => {
 savingsController.updateSaving = async (req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
-    let {amount, account, date} = req.body;
+    let { amount, account, date } = req.body;
+
+    let session = await mongoose.startSession();
+    session.startTransaction();
 
     try {
-        await User.updateOne({
-            _id: userId,
-            "savings._id": id
-        }, {
-            $inc: {
-                "savings.$.currentAmount": amount
-            }
+        const user = await User.findById(userId).session(session);
+
+        let saving = user.savings.id(id);
+        let index = user.savings.findIndex(saving => saving._id == id)
+
+        if(!saving){
+            throw new Error("Invalid saving!");
+        }
+
+        // update saving
+        user.savings[index].currentAmount += Number(amount);
+        await user.save({ session });
+
+        // check if account has enough money
+        let acc = user.accounts.id(account);
+        let accIndex = user.accounts.indexOf(acc);
+        console.log(accIndex)
+
+        if(!acc){
+            throw new Error("Invalid account!");
+        }
+
+        if(acc.currentAmount < amount){
+            throw new Error("Insufficient funds!");
+        }
+
+        //update account
+        user.accounts[accIndex].currentAmount -= Number(amount);
+        await user.save({ session });
+
+        //add transaction
+        user.transactions.addToSet({
+            type: 'savings',
+            typeId: id,
+            account: account,
+            timestamp: date,
+            amount: amount
         })
+        await user.save({ session });
 
-        let newUser = User.findById(userId);
-        let savingsId = newUser.savings[newUser.savings.length - 1]._id;
-
-        //update the account that paid for the expense
-        await User.updateOne({
-            _id: id,
-            "accounts._id": expense.account
-        }, {
-            $inc: {
-                "accounts.$.currentAmount": -amount
-            }
-        })
-
-        // add a new transaction
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                transactions: {
-                    type: 'savings',
-                    typeId: savingsId,
-                    account: account,
-                    timestamp: expense.date,
-                    amount: amount
-                }
-            }
-        });
-
-        let user = await User.findById(userId);
+        await session.commitTransaction();
+        session.endSession();
+        console.log("Saving Updated!");
 
         res.status(200);
         res.json({
@@ -117,10 +130,12 @@ savingsController.updateSaving = async (req, res) => {
         })
     } catch (err) {
         console.error(err);
+        await session.abortTransaction();
+        session.endSession();
         res.status(500)
         res.json({
             status: "error",
-            message: "Sabing not updated!"
+            message: "Saving not updated!"
         })
     }
 }
