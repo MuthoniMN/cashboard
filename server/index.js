@@ -20,10 +20,10 @@ app.use(express.json())
 app.use(cors())
 
 const dotenv = require('dotenv')
+const connectToDb= require('./config/db')
 dotenv.config({path: ".env"})
 
-const dbConnection = require('./config/db')
-dbConnection()
+connectToDb();
 
 const PORT = process.env.PORT
 
