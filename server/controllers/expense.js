@@ -1,47 +1,60 @@
 const User = require('../models/User');
+const mongoose = require('mongoose')
 const expenseController = {};
 
 expenseController.addExpense = async(req, res) => {
     let id = req.query.user
     let expense = {...req.body};
 
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
+
     try {
+        const user = await User.findById(id).session(session);
+
         // add the new expense
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                expenses: expense
-            }
-        });
-
-        // get updated user
-        let user = await User.findById(id);
-
-        //get expense id
-        const expenseId = user.expenses[user.expenses.length - 1]._id
+        user.expenses.addToSet(expense);
+        await user.save({ session })
 
         console.log(expense)
         //update the account that paid for the expense
-        await User.updateOne({
-            _id: id,
-            "accounts._id": expense.account
-        }, {
-            $inc: {
-                "accounts.$.currentAmount": -expense.amount
-            }
-        })
+        // check if account has enough money
+        let acc = user.accounts.id(expense.account);
+        let accIndex = user.accounts.indexOf(acc);
+        console.log(accIndex)
 
-        // add a new transaction
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                transactions: {
-                    type: 'expenses',
-                    typeId: expenseId,
-                    account: expense.account,
-                    timestamp: expense.date,
-                    amount: expense.amount
-                }
-            }
-        });
+        if(!acc){
+            throw new Error("Invalid account!");
+        }
+
+        if(acc.currentAmount < expense.amount){
+            throw new Error("Insufficient funds!");
+        }
+
+        //update account
+        user.accounts[accIndex].currentAmount -= Number(expense.amount);
+        await user.save({ session });
+
+        await session.commitTransaction();
+
+        session.startTransaction();
+
+        let expenseId = user.expenses[user.expenses.length - 1]._id
+
+        //add transaction
+        user.transactions.addToSet({
+            type: 'expenses',
+            typeId: expenseId,
+            account: expense.account,
+            timestamp: expense.date,
+            amount: expense.amount
+        })
+        await user.save({ session });
+
+        await session.commitTransaction();
+        session.endSession();
+        console.log("Expense Added!");
 
         let updatedUser = await User.findById(id);
 

@@ -1,44 +1,54 @@
 const User = require('../models/User')
+const mongoose = require('mongoose')
 const incomeController = {}
 
 incomeController.addIncome = async (req, res) => {
     const id = req.query.user
     const newIncome = req.body
 
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
+
     try {
-        // adding new income
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                income: newIncome
-            }
+        const user = await User.findById(id).session(session);
+
+        // add the new newIncome
+        user.income.addToSet(newIncome);
+        await user.save({ session })
+
+        //update the account that paid for the newIncome
+        // check if account has enough money
+        let acc = user.accounts.id(newIncome.account);
+        let accIndex = user.accounts.indexOf(acc);
+
+        if(!acc){
+            throw new Error("Invalid account!");
+        }
+
+        //update account
+        user.accounts[accIndex].currentAmount += Number(newIncome.amount);
+        await user.save({ session });
+
+        await session.commitTransaction();
+
+        session.startTransaction();
+
+        let incomeId = user.income[user.income.length - 1]._id
+
+        //add transaction
+        user.transactions.addToSet({
+            type: 'income',
+            typeId: incomeId,
+            account: newIncome.account,
+            timestamp: newIncome.payDate,
+            amount: newIncome.amount
         })
+        await user.save({ session });
 
-        //updating account
-        await User.updateOne({
-            _id: id,
-            "accounts._id": newIncome.account
-        }, {
-            $inc: {
-                "accounts.$.currentAmount": newIncome.amount
-            }
-        })
-
-        // getting the income id
-        let user = await User.findById(id);
-        let incomeId = user.income[user.income.length - 1]._id;
-
-        // adding transaction
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                transactions: {
-                    type: 'income',
-                    typeId: incomeId,
-                    account: newIncome.account,
-                    timestamp: newIncome.payDate,
-                    amount: newIncome.amount
-                }
-            }
-        });
+        await session.commitTransaction();
+        session.endSession();
+        console.log("Income Added!");
 
         const updated = await User.findById(id)
         res.status(201)

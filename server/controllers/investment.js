@@ -66,24 +66,61 @@ investmentController.getInvestment = async(req, res) => {
 investmentController.updateInvestment = async(req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
-    let amount = req.body.amount;
+    let {amount, account, date}= req.body.amount;
+
+    let session = await mongoose.startSession();
+    session.startTransaction();
 
     try {
-        await User.updateOne({
-            _id: userId, 
-            "investments._id": id
-        }, {
-            $inc: {
-                "investments.$.currentAmount": amount
-            }
-        })
+        const user = await User.findById(userId).session(session);
 
-        let user = await User.findById(userId);
-        let investment = user.investments.id(id)
+        let investment = user.investments.id(id);
+        let index = user.investments.findIndex(investment => investment._id == id)
+
+        if(!investment){
+            throw new Error("Invalid investment!");
+        }
+
+        // update investment
+        user.investments[index].currentAmount += Number(amount);
+        await user.save({ session });
+
+        // check if account has enough money
+        let acc = user.accounts.id(account);
+        let accIndex = user.accounts.indexOf(acc);
+        console.log(accIndex)
+
+        if(!acc){
+            throw new Error("Invalid account!");
+        }
+
+        if(acc.currentAmount < amount){
+            throw new Error("Insufficient funds!");
+        }
+
+        //update account
+        user.accounts[accIndex].currentAmount -= Number(amount);
+        await user.save({ session });
+
+        //add transaction
+        user.transactions.addToSet({
+            type: 'investments',
+            typeId: id,
+            account: account,
+            timestamp: date,
+            amount: amount
+        })
+        await user.save({ session });
+
+        await session.commitTransaction();
+        session.endSession();
+        console.log("Investment Updated!");
+
+        let updatedInvestment = user.investments.id(id)
 
         res.status(200)
         res.json({
-            investment: investment
+            investment: updatedInvestment
         })
     } catch (error) {
         console.error(err)
