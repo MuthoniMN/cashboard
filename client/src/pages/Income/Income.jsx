@@ -18,6 +18,9 @@ const Income = () => {
                 {income.map(income => (
                     <Card title={income.source} date={income.payDate} account={income.account} amount={income.amount} currency={income.currency} id={income._id} />
                 ))}
+                {income.length === 0 && (
+                    <h3>No Income Yet</h3>
+                )}
             </section>
         </>
     )
