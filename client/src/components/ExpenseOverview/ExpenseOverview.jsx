@@ -16,7 +16,7 @@ export default function ExpenseOverview({data}) {
                 ]}
                 margin={{ right: 5 }}
                 width={250}
-                height={235}
+                height={270}
                 legend={{ hidden: false }}
                 slotProps={{
                     legend: {
