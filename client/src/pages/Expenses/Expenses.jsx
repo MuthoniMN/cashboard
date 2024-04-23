@@ -69,6 +69,11 @@ const Expenses = () => {
                         </td>
                     </tr>
                 )})}
+                {expenses.length === 0 && (
+                        <tr>
+                            <td colSpan={5}>No Expenses Yet</td>
+                        </tr>
+                    )}
             </table>
             </section>
             

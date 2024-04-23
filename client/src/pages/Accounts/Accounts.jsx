@@ -44,6 +44,11 @@ const Accounts = () => {
                     </td>
                 </tr>
             ))}
+            {accounts.length === 0 && (
+                        <tr>
+                            <td colSpan={4}>No Accounts Added</td>
+                        </tr>
+                    )}
          </table>
         </>
     )
