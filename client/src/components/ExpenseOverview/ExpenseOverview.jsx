@@ -5,7 +5,7 @@ export default function ExpenseOverview({data}) {
     return (
         <section className="overviews">
             <h2>Expenses Overview</h2>
-            <PieChart
+            {data.length > 0 && <PieChart
                 series={[
                     {
                         paddingAngle: 5,
@@ -25,7 +25,8 @@ export default function ExpenseOverview({data}) {
                       padding: 0,
                     },
                   }}
-            />
+            />}
+            {data.length === 0 && (<p style={{margin: "24px 0"}}>No Expenses Added Yet!</p>)}
         </section>
     )
 }

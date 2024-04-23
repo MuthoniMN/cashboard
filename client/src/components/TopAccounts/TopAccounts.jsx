@@ -9,6 +9,7 @@ export default function TopAccounts({ accounts }){
                 {accounts.map(account => (
                     <AccountCard account={account} />
                 ))}
+                {accounts.length === 0 && (<p>No Accounts Yet</p>)}
             </section>
         </section>
     )

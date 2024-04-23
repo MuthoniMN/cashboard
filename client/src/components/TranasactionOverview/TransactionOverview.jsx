@@ -16,7 +16,7 @@ export default function TransactionOverview({ transactions }){
                     </tr>
                 </thead>
                 <tbody>
-                    {transactions.map(t => {
+                    {transactions &&  transactions.map(t => {
                         const date = new Date(t.timestamp);
                         let desc = "";
                         const account = currentUser.accounts.find(account => account._id === t.account) || "Invalid"
@@ -49,6 +49,11 @@ export default function TransactionOverview({ transactions }){
                             </tr>
                         )
                     })}
+                    {transactions.length === 0 && (
+                        <tr>
+                            <td colSpan={4}>No Transactions Yet</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </section>
