@@ -17,6 +17,9 @@ import AddAccount from './pages/AddAccount/AddAccount';
 import AddIncome from './pages/AddIncome/AddIncome';
 import AddSaving from './pages/AddSaving/AddSaving';
 import EditSaving from './pages/EditSaving/EditSaving';
+import AddInvestment from './pages/AddInvestment/AddInvestment';
+import DepositInvestment from './pages/DepositInvestment/DepositInvestment';
+import WithdrawInvestment from './pages/WithdrawInvestment/WithdrawInvestment';
 
 function App() {
   const { currentUser }= useContext(AuthContext)
@@ -70,6 +73,18 @@ function App() {
         {
           path: '/savings/edit/:id',
           element: isAuthenticated ? <EditSaving /> : <Login />,
+        },
+        {
+          path: '/investments/add',
+          element: isAuthenticated ? <AddInvestment /> : <Login />,
+        },
+        {
+          path: '/investments/deposit/:id',
+          element: isAuthenticated ? <DepositInvestment /> : <Login />,
+        },
+        {
+          path: '/investments/withdraw/:id',
+          element: isAuthenticated ? <WithdrawInvestment /> : <Login />,
         },
         {
           path: '/savings',
