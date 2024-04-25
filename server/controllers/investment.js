@@ -1,17 +1,61 @@
 const User = require('../models/User');
+const mongoose = require('mongoose')
 const investmentController = {};
 
 investmentController.addInvestment = async (req, res) => {
     let id = req.query.user
-    let newInvestment = {...req.body, lastModified: new Date()}
+    let {desc, amount, account, date, category} = req.body
     
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        await User.findByIdAndUpdate(id, {
-            $push: {
-                investments: newInvestment
-            }
+        const user = await User.findById(id).session(session);
+
+        user.investments.addToSet({
+            desc,
+            category,
+            currentAmount: amount
         })
-        let user = await User.findById(id)
+        await user.save({ session });
+
+        // check if account has enough money
+        let acc = user.accounts.id(account);
+        let accIndex = user.accounts.indexOf(acc);
+        console.log(accIndex)
+
+        if(!acc){
+            throw new Error("Invalid account!");
+        }
+
+        if(acc.currentAmount < amount){
+            throw new Error("Insufficient funds!");
+        }
+
+        //update account
+        user.accounts[accIndex].currentAmount -= Number(amount);
+        await user.save({ session });
+        
+        await session.commitTransaction();
+
+        session.startTransaction();
+
+        let investmentId = user.investment[user.investment.length - 1]._id
+
+        //add transaction
+        user.transactions.addToSet({
+            type: 'investments',
+            typeId: investmentId,
+            account: account,
+            timestamp: date,
+            amount: amount
+        })
+        await user.save({ session });
+
+        await session.commitTransaction();
+        session.endSession();
+        console.log("Investment Updated!");
+
         res.status(200)
         res.json({
             investments: user.investments
