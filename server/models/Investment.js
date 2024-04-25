@@ -5,10 +5,6 @@ const InvestmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    lastModified: {
-        type: Date,
-        required: true
-    },
     currentAmount: {
         type: Number,
         required: true
@@ -17,6 +13,6 @@ const InvestmentSchema = new mongoose.Schema({
     category: {
         type: String
     },
-});
+}, { timestamps: true });
 
 module.exports = InvestmentSchema;
