@@ -110,7 +110,7 @@ investmentController.getInvestment = async(req, res) => {
 investmentController.updateInvestment = async(req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
-    let {amount, account, date}= req.body.amount;
+    let {amount, account, date}= req.body;
 
     let session = await mongoose.startSession();
     session.startTransaction();
@@ -167,7 +167,7 @@ investmentController.updateInvestment = async(req, res) => {
             investment: updatedInvestment
         })
     } catch (error) {
-        console.error(err)
+        console.error(error)
         res.status(500)
         res.json({
             status: "error",
@@ -180,9 +180,20 @@ investmentController.deleteInvestment = async(req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
 
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        let user = await User.findById(userId);
-        user.investments.id(id).deleteOne();
+        const user = await User.findById(userId).session(session);
+
+        user.income.id(id).deleteOne();
+        user.save({ session });
+
+        user.transactions.pull({ typeId: id });
+        user.save({ session });
+
+        session.commitTransaction();
+        session.endSession();
         res.status(200)
         res.json({
             status: "success",
