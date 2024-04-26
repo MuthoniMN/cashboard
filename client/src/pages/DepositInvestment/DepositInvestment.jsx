@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../../components/Header/Header";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ export default function DepositInvestment() {
         }
 {}
         try {
-            const data = await axios.put(`http://localhost:5000/investments/${id}?user=${currentUser._id}`, {...value});
+            const data = await axios.put(`http://localhost:5000/investment/${id}?user=${currentUser._id}`, {...value});
             
             setSuccess("Investment added successfully!")
 
