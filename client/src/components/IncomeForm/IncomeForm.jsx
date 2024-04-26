@@ -4,13 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import validate from '../../utils/validate';
 import axios from 'axios';
 import updateCurrentUser from '../../utils/updateUser';
-const IncomeForm = () => {
+const IncomeForm = ( { investment } ) => {
     const {currentUser, setCurrentUser} = useContext(AuthContext);
     const accounts = currentUser.accounts;
     const [income, setIncome] = useState({});
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const navigate = useNavigate()
+
+    if(investment){
+        income.source = investment._id;
+        income.category = 'investment';
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +34,7 @@ const IncomeForm = () => {
 
             let updated = await updateCurrentUser(currentUser._id);
             setCurrentUser(updated);
-            navigate('/income')
+            investment ? navigate('/income') : navigate('/investments')
             
         } catch (error) {
             console.error(error);
@@ -41,7 +46,7 @@ const IncomeForm = () => {
         <form className='dashboard'>
             <div>
                 <label htmlFor='desc'>Income Source: </label>
-                <input type='text' id='desc' value={income.source} onChange={(e) => setIncome( {...income, source: e.target.value})} />
+                <input type='text' id='desc' value={income.source} onChange={(e) => setIncome( {...income, source: e.target.value})} disabled={investment ? true : false} />
             </div>
             <div>
                 <label htmlFor='account'>Account: </label>
@@ -54,12 +59,12 @@ const IncomeForm = () => {
             </div>
             <div>
                 <label htmlFor='category'>Category: </label>
-                <select id='category'value={income.category} onChange={(e) => setIncome( {...income, category: e.target.value})} >
+                <select id='category'value={income.category} onChange={(e) => setIncome( {...income, category: e.target.value})}  disabled={investment ? true : false} >
                     <option>Choose a Category</option>
                     <option value='Job' >Job</option>
                     <option value='Business'>Business</option>
                     <option value='Side Hustle'>Side Hustle</option>
-                    <option value='Investment'>Investment</option>
+                    <option value='Investment' defaultChecked={investment ? true : false}>Investment</option>
                     <option value='family & friends'>Family & Friends</option>
                 </select>
             </div>
