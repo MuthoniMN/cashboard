@@ -1,0 +1,9 @@
+.pages{
+    margin: 12px 24px;
+    float: right;
+}
+.pages a{
+    margin: 0;
+    padding: 2px 8px;
+    border: 1px solid #1D70A2;
+}
