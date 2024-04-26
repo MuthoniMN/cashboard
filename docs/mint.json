@@ -1,43 +1,91 @@
 {
-  "name": "Mintlify",
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Cashboard API",
   "logo": {
-    "light": "/logo/light-logo.png",
-    "dark": "/logo/dark-logo.png"
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
   },
-  "favicon": "/logo/favicon.ico",
+  "favicon": "/favicon.png",
   "colors": {
     "primary": "#59C3C3",
-    "secondary": "#52489C",
-    "light": "#fafafa",
-    "dark": "#1F2421"
+    "light": "#1D70A2",
+    "dark": "#59C3C3",
+    "anchors": {
+      "from": "#59C3C3",
+      "to": "#1D70A2"
+    }
   },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:hi@mintlify.com"
+    }
+  ],
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://1tc7vihvbit.typeform.com/to/pZJ31XZB"
+    "name": "Dashboard",
+    "url": "https://dashboard.mintlify.com"
   },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "anchors": [
     {
-      "name": "API Components",
-      "icon": "rectangle-terminal",
-      "color": "#f59f0b",
-      "url": "api-components"
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://mintlify.com/docs"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://mintlify.com/community"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://mintlify.com/blog"
     }
   ],
   "navigation": [
     {
-      "group": "Getting Started",
-      "pages": ["introduction", "quickstart"]
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
     },
     {
-      "group": "API Components",
-      "pages": ["api-playground/overview", "api-playground/configuration"]
+      "group": "Essentials",
+      "pages": [
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation",
+        "essentials/reusable-snippets"
+      ]
     },
     {
-      "group": "Settings",
-      "pages": ["settings/global", "settings/page"]
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Endpoint Examples",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
+      ]
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/MuthoniMN/cashboard"
+    "twitter": "https://twitter.com/mintlify",
+    "github": "https://github.com/mintlify",
+    "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
 }
