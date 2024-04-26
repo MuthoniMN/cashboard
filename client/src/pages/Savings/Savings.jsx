@@ -35,7 +35,7 @@ const Savings = () => {
             </button>
             <section className="flex">
                 {
-                    savings.map(saving => (
+                    pageData.map(saving => (
                         <SavingsCard saving={saving} />
                     ))
                 }

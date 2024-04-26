@@ -35,7 +35,7 @@ const Investments = () => {
                 <Link to={'/investments/add'}>Add Investment</Link>
             </button>
             <section style={{padding: "24px"}}>
-                {investments.map(investment => (
+                {pageData.map(investment => (
                     <InvestmentCard investment={investment} />
                 ))}
             </section>
