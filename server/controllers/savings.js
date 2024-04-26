@@ -144,10 +144,20 @@ savingsController.deleteSaving = async (req, res) => {
     let userId = req.query.user
     let id = req.params.id
 
-    try {
-        let user = await User.findById(userId)
+    let session = await mongoose.startSession();
+    session.startTransaction();
 
-        user.savings.id(id).deleteOne()
+    try {
+        const user = await User.findById(userId).session(session);
+
+        user.savings.id(id).deleteOne();
+        user.save({ session });
+
+        user.transactions.pull({ typeId: id });
+        user.save({ session });
+
+        session.commitTransaction();
+        session.endSession();
 
         res.status(200)
         res.json({
