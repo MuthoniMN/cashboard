@@ -13,12 +13,27 @@ incomeController.addIncome = async (req, res) => {
     try {
         const user = await User.findById(id).session(session);
 
+        if(newIncome.category === 'investment'){
+            const investment = user.investments.id(newIncome.source);
+            let invIndex = user.investments.indexOf(investment);
+            if(investment){
+                newIncome.source = investment.desc;
+
+                if(investment.currentAmount < newIncome.amount){
+                    throw new Error("Insufficient funds!");
+                }
+
+                //update investment
+                user.investments[invIndex].currentAmount -= Number(newIncome.amount);
+                await user.save({ session });
+            }
+        }
+
         // add the new newIncome
         user.income.addToSet(newIncome);
         await user.save({ session })
 
-        //update the account that paid for the newIncome
-        // check if account has enough money
+        // check if account exists
         let acc = user.accounts.id(newIncome.account);
         let accIndex = user.accounts.indexOf(acc);
 
@@ -111,12 +126,21 @@ incomeController.deleteIncome = async (req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
 
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        await User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { income: { _id: id} } },
-            { new: true }
-        )
+        const user = await User.findById(userId).session(session);
+
+        user.income.id(id).deleteOne();
+        user.save({ session });
+
+        user.transactions.pull({ typeId: id });
+        user.save({ session });
+
+        session.commitTransaction();
+        session.endSession();
+        
         res.status(200)
         res.json({
             status: "success",
