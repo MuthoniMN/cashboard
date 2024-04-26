@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import './Accounts.css'
 import Header from '../../components/Header/Header';
 import { Link } from 'react-router-dom';
@@ -6,10 +6,29 @@ import { AuthContext } from '../../contexts/AuthContext';
 import {FaTrash} from "react-icons/fa6";
 import deleteProperty from '../../utils/delete';
 import updateCurrentUser from '../../utils/updateUser';
+import Pagination from '../../components/Pagination/Pagination';
 
 const Accounts = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext);
     const accounts = currentUser.accounts;
+    const [currentPage, setCurrentPage] = useState(1);
+    const maxPerPage = 5;
+
+    const last = currentPage * maxPerPage;
+    const first = last - maxPerPage
+    const pageData = accounts.slice(first, last)
+
+    const paginate = (num) => setCurrentPage(num);
+    const back = () => {
+        if(currentPage - 1 > 0){
+            setCurrentPage(page => page - 1)
+        }
+    };
+    const forward = () => {
+        if (currentPage + 1 <= Math.ceil(accounts.length / maxPerPage)) {
+            setCurrentPage(page => page + 1)
+        }
+    };
 
     async function deleteAccount(id){
         await deleteProperty(`http://localhost:5000/account/${id}?user=${currentUser._id}`);
@@ -32,7 +51,7 @@ const Accounts = () => {
                 <th>Balance</th>
                 <th>Delete</th>
             </tr>
-            {accounts.map(account => (
+            {pageData.map(account => (
                 <tr>
                     <td>{account.name}</td>
                     <td>{account.desc}</td>
@@ -50,6 +69,7 @@ const Accounts = () => {
                         </tr>
                     )}
          </table>
+         <Pagination max={maxPerPage} total={accounts.length} paginate={paginate} back={back} forward={forward} />
         </>
     )
 }

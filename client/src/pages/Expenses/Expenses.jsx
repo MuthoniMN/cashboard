@@ -7,11 +7,30 @@ import { AuthContext } from '../../contexts/AuthContext';
 import {FaTrash} from "react-icons/fa6";
 import deleteProperty from '../../utils/delete';
 import updateCurrentUser from '../../utils/updateUser';
+import Pagination from '../../components/Pagination/Pagination';
 
 const Expenses = () => {
     const {currentUser, setCurrentUser} = useContext(AuthContext);
     const expenses = currentUser.expenses;  
     const categories = [];
+    const [currentPage, setCurrentPage] = useState(1);
+    const maxPerPage = 7;
+
+    const last = currentPage * maxPerPage;
+    const first = last - maxPerPage
+    const pageData = expenses.slice(first, last)
+
+    const paginate = (num) => setCurrentPage(num);
+    const back = () => {
+        if(currentPage - 1 > 0){
+            setCurrentPage(page => page - 1)
+        }
+    };
+    const forward = () => {
+        if (currentPage + 1 <= Math.ceil(expenses.length / maxPerPage)) {
+            setCurrentPage(page => page + 1)
+        }
+    };
 
     expenses.forEach(expense => {
         let index = categories.findIndex(category => category.name === expense.category);
@@ -54,7 +73,7 @@ const Expenses = () => {
                     <th>Amount</th>
                     <th>Delete</th>
                 </tr>
-                {expenses.map(expense =>{ 
+                {pageData.map(expense =>{ 
                         let date = new Date(expense.date)
                     return (
                     <tr>
@@ -75,6 +94,7 @@ const Expenses = () => {
                         </tr>
                     )}
             </table>
+            <Pagination max={maxPerPage} total={expenses.length} paginate={paginate} back={back} forward={forward} />
             </section>
             
             <Categories heading="Where did your money go?" categories={categories} />
