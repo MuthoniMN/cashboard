@@ -117,12 +117,20 @@ accountController.deleteAccount = async (req, res) => {
     let userId = req.query.user
     let id = req.params.id
 
+    let session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
-        await User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { accounts: { _id: id} } },
-            { new: true }
-        )
+        const user = await User.findById(userId).session(session);
+
+        user.accounts.id(id).deleteOne();
+        user.save({ session });
+
+        user.transactions.pull({ account: id });
+        user.save({ session });
+
+        session.commitTransaction();
+        session.endSession();
 
         res.status(200)
         res.json({
