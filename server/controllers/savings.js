@@ -94,6 +94,7 @@ savingsController.updateSaving = async (req, res) => {
 
         // update saving
         user.savings[index].currentAmount += Number(amount);
+        console.log(user.savings[index].currentAmount);
         await user.save({ session });
 
         // check if account has enough money
