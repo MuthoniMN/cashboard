@@ -194,7 +194,7 @@ investmentController.deleteInvestment = async(req, res) => {
     try {
         let user = await User.findById(userId).session(session);
 
-        user.investments.id(id).deleteOne();
+        user.investments.pull({ _id: id });
         await user.save({ session });
 
         user = await User.findById(userId).session(session);
