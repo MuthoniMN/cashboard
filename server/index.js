@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 // allow for requests from the frontend
 const corsOptions = {
-    origin: ['http://localhost:5137', 'https://cashboard-app.onrender.com']
+    origin: ['http://localhost:5137', 'https://cashboard-ucpq.onrender.com']
   };
 app.use(cors(corsOptions));
 
