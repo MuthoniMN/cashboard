@@ -17,7 +17,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 // parsing the request body
 app.use(express.json())
 // allow for requests from the frontend
-app.use(cors())
+const corsOptions = {
+    origin: ['http://localhost:5137', 'https://cashboard-app.onrender.com']
+  };
+app.use(cors(corsOptions));
 
 const dotenv = require('dotenv')
 const connectToDb= require('./config/db')
