@@ -40,7 +40,7 @@ investmentController.addInvestment = async (req, res) => {
 
         session.startTransaction();
 
-        let investmentId = user.investment[user.investment.length - 1]._id
+        let investmentId = user.investments[user.investments.length - 1]._id
 
         //add transaction
         user.transactions.addToSet({
