@@ -8,6 +8,7 @@ savingsController.addSavings = async (req, res) => {
     let id = req.query.user;
     let saving = { ...req.body }
 
+
     try {
         // add saving
         await User.findByIdAndUpdate(id, {
@@ -75,6 +76,7 @@ savingsController.updateSaving = async (req, res) => {
     let userId = req.query.user;
     let id = req.params.id;
     let { amount, account, date } = req.body;
+    console.log(req.body);
 
     let session = await mongoose.startSession();
     session.startTransaction();
@@ -83,6 +85,7 @@ savingsController.updateSaving = async (req, res) => {
         const user = await User.findById(userId).session(session);
 
         let saving = user.savings.id(id);
+        console.log(saving);
         let index = user.savings.findIndex(saving => saving._id == id)
 
         if(!saving){
