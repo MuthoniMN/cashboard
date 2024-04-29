@@ -40,12 +40,13 @@ nav.navMenu>ul a{
     top: 6px;
     left: 12px;
     z-index: 21324;
+    margin: 0;
     cursor: pointer;
     display: none;
     transition: all 200ms ease-in-out;
     background-color: #8F3985;
     color: #fafafa;
-    padding: 8px;
+    padding: 4px 8px;
     border-radius: 10px;
 }
 
@@ -56,6 +57,7 @@ nav.navMenu>ul a{
 @media screen and (max-width: 600px) {
     nav.navMenu{
         transform: translateX(-150px);
+        background-color: #59c3c3d0;
     }
     .mobileNav{
         display: block;
