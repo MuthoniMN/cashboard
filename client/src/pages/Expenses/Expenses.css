@@ -23,7 +23,6 @@
     .expensesContainer{
         flex-wrap: wrap;
         left: 0;
-        top: 85px;
     }
 
     .expensesContainer>*{
