@@ -33,7 +33,7 @@ investmentController.addInvestment = async (req, res) => {
         }
 
         //update account
-        user.accounts[accIndex].currentAmount -= Number(amount);
+        user.accounts[accIndex].currentAmount = user.accounts[accIndex].currentAmount - Number(amount);
         await user.save({ session });
         
         await session.commitTransaction();
