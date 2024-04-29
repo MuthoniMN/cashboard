@@ -1,7 +1,6 @@
 const validate = {};
 
 validate.isEmpty = function (...fields){
-    console.log(fields)
     let emptyFields = fields.filter(field => field === undefined)
 
     return emptyFields.length > 0 ? true : false

@@ -6,7 +6,6 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Login = () => {
-    console.log(process.env.REACT_APP_BACKEND_API)
     //  "12Qu33ns"  test5
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
