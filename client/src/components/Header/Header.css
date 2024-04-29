@@ -2,7 +2,7 @@ header{
     position: absolute;
     top: 16px;
     left: 130px;
-    width: 87%;
+    right: 12px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -97,8 +97,11 @@ header .changeCurrency input[type="submit"]:hover{
     background: red;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
     header>.title_section{
         display: none;
+    }
+    header{
+        justify-content: flex-end;
     }
 }
