@@ -85,7 +85,6 @@ savingsController.updateSaving = async (req, res) => {
         const user = await User.findById(userId).session(session);
 
         let saving = user.savings.id(id);
-        console.log(saving);
         let index = user.savings.findIndex(saving => saving._id == id)
 
         if(!saving){
@@ -93,7 +92,7 @@ savingsController.updateSaving = async (req, res) => {
         }
 
         // update saving
-        user.savings[index].currentAmount += Number(amount);
+        user.savings[index].currentAmount = user.savings[index].currentAmount + Number(amount);
         console.log(user.savings[index].currentAmount);
         await user.save({ session });
 
