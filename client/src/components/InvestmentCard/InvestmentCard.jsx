@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function InvestmentCard({investment}){
     return (
-        <div className="investmentCard">
+        <div className="investmentCard" key={investment._id}>
             <h3>{investment.desc}</h3>
             <p className="category">{investment.category}</p>
             <p>Current Amount: {investment.currentAmount}</p>

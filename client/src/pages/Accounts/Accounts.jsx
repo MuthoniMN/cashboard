@@ -46,29 +46,33 @@ const Accounts = () => {
             </button>
             <section className='table_container'>
                 <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Desc</th>
-                        <th>Balance</th>
-                        <th className='deleteColumn'>Delete</th>
-                    </tr>
-                    {pageData.map(account => (
+                    <thead>
                         <tr>
-                            <td>{account.name}</td>
-                            <td>{account.desc}</td>
-                            <td>{account.currency + " " + account.currentAmount}</td>
-                            <td className='deleteColumn'>
-                                <button className="deleteButton" onClick={() => deleteAccount(account._id)}>
-                                    <FaTrash />
-                                </button>
-                            </td>
+                            <th>Name</th>
+                            <th>Desc</th>
+                            <th>Balance</th>
+                            <th className='deleteColumn'>Delete</th>
                         </tr>
-                    ))}
-                    {accounts.length === 0 && (
-                        <tr>
-                            <td colSpan={4}>No Accounts Added</td>
-                        </tr>
-                    )}
+                    </thead>
+                    <tbody>
+                        {pageData.map(account => (
+                            <tr key={account._id}>
+                                <td>{account.name}</td>
+                                <td>{account.desc}</td>
+                                <td>{account.currency + " " + account.currentAmount}</td>
+                                <td className='deleteColumn'>
+                                    <button className="deleteButton" onClick={() => deleteAccount(account._id)}>
+                                        <FaTrash />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                        {accounts.length === 0 && (
+                            <tr>
+                                <td colSpan={4}>No Accounts Added</td>
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </section>
             <Pagination max={maxPerPage} total={accounts.length} paginate={paginate} back={back} forward={forward} />

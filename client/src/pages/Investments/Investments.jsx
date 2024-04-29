@@ -36,7 +36,7 @@ const Investments = () => {
             </button>
             <section className='investmentContainer' style={{padding: "24px"}}>
                 {pageData.map(investment => (
-                    <InvestmentCard investment={investment} />
+                    <InvestmentCard investment={investment} key={investment._id} />
                 ))}
             </section>
             <Pagination max={maxPerPage} total={investments.length} paginate={paginate} back={back} forward={forward} />

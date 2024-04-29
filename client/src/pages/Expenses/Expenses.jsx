@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Expenses.css';
 import Header from '../../components/Header/Header';
 import Categories from '../../components/Categories/Categories';
 import { AuthContext } from '../../contexts/AuthContext';
-import {FaTrash} from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa6";
 import deleteProperty from '../../utils/delete';
 import updateCurrentUser from '../../utils/updateUser';
 import Pagination from '../../components/Pagination/Pagination';
 
 const Expenses = () => {
-    const {currentUser, setCurrentUser} = useContext(AuthContext);
-    const expenses = currentUser.expenses;  
+    const { currentUser, setCurrentUser } = useContext(AuthContext);
+    const expenses = currentUser.expenses;
     const categories = [];
     const [currentPage, setCurrentPage] = useState(1);
     const maxPerPage = 7;
@@ -22,7 +22,7 @@ const Expenses = () => {
 
     const paginate = (num) => setCurrentPage(num);
     const back = () => {
-        if(currentPage - 1 > 0){
+        if (currentPage - 1 > 0) {
             setCurrentPage(page => page - 1)
         }
     };
@@ -34,72 +34,72 @@ const Expenses = () => {
 
     expenses.forEach(expense => {
         let index = categories.findIndex(category => category.name === expense.category);
-        console.log(expense.category)
-        console.log(index)
-        if(index === -1){
+        if (index === -1) {
             categories.push({
                 name: expense.category,
                 total: expense.amount
             })
-        }else{
+        } else {
             categories[index].total += expense.amount
         }
     })
 
-    async function deleteExpense(id){
+    async function deleteExpense(id) {
         await deleteProperty(`${process.env.REACT_APP_BACKEND_API}/expense/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 
         setCurrentUser(user);
-        console.log(currentUser);
     }
-    let t = new Date().toLocaleDateString();
-    console.log(t)
-    
+
     return (
         <>
-        <Header title='Your Expenses' desc='An overview of your expenses.' />
-        <section className='expensesContainer' style={{textAlign: 'left'}}>
-            <div style={{marginTop: "85px", flexGrow: "3"}}>
-            <button>
-                <Link to='/expenses/add'>Add an Expense</Link>
-            </button>
-            <section className='expensesTable'>
-                <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Desc</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th className='deleteColumn'>Delete</th>
-                </tr>
-                {pageData.map(expense =>{ 
-                        let date = new Date(expense.date)
-                    return (
-                    <tr>
-                        <td>{date.toLocaleDateString()}</td>
-                        <td>{expense.desc}</td>
-                        <td>{expense.category}</td>
-                        <td>{expense.currency + " " + expense.amount}</td>
-                        <td className='deleteColumn'>
-                            <button className="deleteButton" onClick={() => deleteExpense(expense._id)}>
-                                <FaTrash />
-                            </button>
-                        </td>
-                    </tr>
-                )})}
-                {expenses.length === 0 && (
-                        <tr>
-                            <td colSpan={5}>No Expenses Yet</td>
-                        </tr>
-                    )}
-            </table>
-            <Pagination max={maxPerPage} total={expenses.length} paginate={paginate} back={back} forward={forward} />
+            <Header title='Your Expenses' desc='An overview of your expenses.' />
+            <section className='expensesContainer' style={{ textAlign: 'left' }}>
+                <div style={{ marginTop: "85px", flexGrow: "3" }}>
+                    <button>
+                        <Link to='/expenses/add'>Add an Expense</Link>
+                    </button>
+                    <section className='expensesTable'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Desc</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th className='deleteColumn'>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {pageData.map(expense => {
+                                    let date = new Date(expense.date)
+                                    return (
+                                        <tr key={expense._id}>
+                                            <td>{date.toLocaleDateString()}</td>
+                                            <td>{expense.desc}</td>
+                                            <td>{expense.category}</td>
+                                            <td>{expense.currency + " " + expense.amount}</td>
+                                            <td className='deleteColumn'>
+                                                <button className="deleteButton" onClick={() => deleteExpense(expense._id)}>
+                                                    <FaTrash />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                                {expenses.length === 0 && (
+                                    <tr>
+                                        <td colSpan={5}>No Expenses Yet</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                        <Pagination max={maxPerPage} total={expenses.length} paginate={paginate} back={back} forward={forward} />
+                    </section>
+                </div>
+                <Categories heading="Where did your money go?" categories={categories} />
             </section>
-            </div>
-            <Categories heading="Where did your money go?" categories={categories} />
-        </section>
         </>
     )
 }

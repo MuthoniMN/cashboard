@@ -36,7 +36,7 @@ const Savings = () => {
             <section className="flex">
                 {
                     pageData.map(saving => (
-                        <SavingsCard saving={saving} />
+                        <SavingsCard saving={saving} key={saving._id}/>
                     ))
                 }
                 {savings.length === 0 && (

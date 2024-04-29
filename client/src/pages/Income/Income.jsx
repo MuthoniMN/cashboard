@@ -48,35 +48,39 @@ const Income = () => {
             </button>
             <section className='table_container'>
                 <table>
-                    <tr>
-                        <th>Income Source</th>
-                        <th>Date</th>
-                        <th>Account</th>
-                        <th>Amount</th>
-                        <th className='deleteColumn'>Delete</th>
-                    </tr>
-                    {pageData.map(income => {
-                        let date = new Date(income.payDate).toLocaleDateString();
-                        let account = accounts.find(acc => income.account == acc._id)
-                        return (
-                            <tr>
-                                <td>{income.source}</td>
-                                <td>{date}</td>
-                                <td>{account.desc}</td>
-                                <td>{income.currency + " " + income.amount}</td>
-                                <td className='deleteColumn'>
-                                    <button className="deleteButton" onClick={() => deleteIncome(income._id)}>
-                                        <FaTrash />
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                    {income.length === 0 && (
+                    <thead>
                         <tr>
-                            <td colSpan={4}>No Accounts Added</td>
+                            <th>Income Source</th>
+                            <th>Date</th>
+                            <th>Account</th>
+                            <th>Amount</th>
+                            <th className='deleteColumn'>Delete</th>
                         </tr>
-                    )}
+                    </thead>
+                    <tbody>
+                        {pageData.map(income => {
+                            let date = new Date(income.payDate).toLocaleDateString();
+                            let account = accounts.find(acc => income.account == acc._id)
+                            return (
+                                <tr key={income._id}>
+                                    <td>{income.source}</td>
+                                    <td>{date}</td>
+                                    <td>{account.desc}</td>
+                                    <td>{income.currency + " " + income.amount}</td>
+                                    <td className='deleteColumn'>
+                                        <button className="deleteButton" onClick={() => deleteIncome(income._id)}>
+                                            <FaTrash />
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                        {income.length === 0 && (
+                            <tr>
+                                <td colSpan={4}>No Accounts Added</td>
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </section>
             <Pagination max={maxPerPage} total={income.length} paginate={paginate} back={back} forward={forward} />

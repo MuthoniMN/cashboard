@@ -16,7 +16,7 @@ export default function SavingsCard({ saving }) {
         setCurrentUser(user);
     }
     return (
-        <div className="savingsCard">
+        <div className="savingsCard" key={saving._id}>
             <h3>{saving.desc}</h3>
             <p>Goal: {saving.goal}</p>
             <p>Amount: {saving.currentAmount}</p>
