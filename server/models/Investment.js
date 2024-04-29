@@ -7,7 +7,8 @@ const InvestmentSchema = new mongoose.Schema({
     },
     currentAmount: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     currency: String,
     category: {
