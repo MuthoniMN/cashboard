@@ -48,7 +48,7 @@ const Header = ({title, desc}) => {
             <div>
                 <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
                     <option>{currentUser.currency}</option>
-                   {currencies.filter(a => a !== currency).map((currency) => (<option>{currency}</option>))}
+                   {currencies.filter(a => a !== currency).map((currency) => (<option key={currency}>{currency}</option>))}
                 </select>
                 <h3>@{currentUser.username}</h3>
             </div>
