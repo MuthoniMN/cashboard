@@ -91,7 +91,7 @@ accountController.updateAccount = async(req, res) => {
             _id: userId,
             "accounts._id": id
         }, {
-            $set: {
+            $inc: {
                 "accounts.$.currentAmount": amount
             }
         })
