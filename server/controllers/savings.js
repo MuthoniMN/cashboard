@@ -58,6 +58,14 @@ savingsController.getSaving = async (req, res) => {
 
         let saving = user.savings.id(id)
 
+        if(!saving){
+            res.status(404)
+            res.json({
+                status: "error",
+                mesage: "Sorry! We couldn't find the saving"
+            })
+        }
+
         res.status(200)
         res.json({
             saving: saving

@@ -75,7 +75,7 @@ incomeController.addIncome = async (req, res) => {
         res.status(500)
         res.json({
             status: "error",
-            message: "Income not added"
+            message: err
         })
     }
 }
@@ -107,6 +107,14 @@ incomeController.getIncome = async (req, res) => {
     try {
         let user = await User.findById(userId);
         let income = user.income.id(id)
+
+        if(!income){
+            res.status(404)
+            res.json({
+                status: "error",
+                mesage: "Sorry! We couldn't find the income"
+            })
+        }
 
         res.status(200)
         res.json({
@@ -152,7 +160,7 @@ incomeController.deleteIncome = async (req, res) => {
         console.error(err)
         res.status(500)
         res.json({
-            status: "success",
+            status: "error",
             message: "The income was not deleted!"
         })
     }

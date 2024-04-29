@@ -66,7 +66,7 @@ investmentController.addInvestment = async (req, res) => {
         res.status(500);
         res.json({
             status: "error",
-            message: "Investment could not be added!"
+            message: err
         })
     }
 }
@@ -96,6 +96,13 @@ investmentController.getInvestment = async(req, res) => {
     try {
         let user = await User.findById(userId)
         let investment = user.investments.id(id)
+        if(!investment){
+            res.status(404)
+            res.json({
+                status: "error",
+                mesage: "Sorry! We couldn't find the investment"
+            })
+        }
         res.status(200)
         res.json(investment)
     } catch (err) {

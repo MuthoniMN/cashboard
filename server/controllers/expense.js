@@ -98,6 +98,14 @@ expenseController.getExpense = async(req, res) => {
         let user = await User.findById(userId)
         let expense = user.expenses.id(id)
 
+        if(!expense){
+            res.status(404)
+            res.json({
+                status: "error",
+                mesage: "Sorry! We couldn't find the expense"
+            })
+        }
+
         res.status(200)
         res.json({
             expense: expense
@@ -107,7 +115,7 @@ expenseController.getExpense = async(req, res) => {
         res.status(500)
         res.json({
             status: "error",
-            message: "Saving not found!"
+            message: "Expense not found!"
         })
     }
 }
@@ -135,14 +143,14 @@ expenseController.deleteExpense = async(req, res) => {
 
         res.status(200)
         res.json({
-            status: "sucess",
+            status: "success",
             message: "Expense successfully deleted!"
         })
     } catch (error) {
         console.error(error);
         res.status(500)
         res.json({
-            status: "sucess",
+            status: "error",
             message: "Expense not deleted!"
         })
     }
