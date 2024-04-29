@@ -23,7 +23,7 @@ const Register = () => {
         }
 //"Amin56der" "11Manifest55"
         try {
-            const data = await axios.post("http://localhost:5000/user/add", user)
+            const data = await axios.post(`${process.env.REACT_APP_BACKEND_API}/user/add`, user)
             
             setSuccess("Registration Successful! Please login")
 

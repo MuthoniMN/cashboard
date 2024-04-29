@@ -9,7 +9,7 @@ export default function SavingsCard({ saving }) {
     const { currentUser, setCurrentUser } = useContext(AuthContext);
 
     async function deleteSaving(id) {
-        await deleteProperty(`http://localhost:5000/savings/${id}?user=${currentUser._id}`);
+        await deleteProperty(`${process.env.REACT_APP_BACKEND_API}/savings/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 

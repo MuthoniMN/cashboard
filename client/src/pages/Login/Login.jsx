@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Login = () => {
+    console.log(process.env.REACT_APP_BACKEND_API)
     //  "12Qu33ns"  test5
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
@@ -23,7 +24,7 @@ const Login = () => {
         }
 
         try {
-            const res = await axios.post('http://localhost:5000/auth/login', user)
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_API}/auth/login`, user)
             setSuccess("Login Successful!")
             setCurrentUser(res.data.user)
             setToken(res.data.token)

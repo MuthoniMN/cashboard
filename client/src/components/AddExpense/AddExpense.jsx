@@ -26,7 +26,7 @@ const AddExpenseForm = () => {
         }
 {}
         try {
-            const data = await axios.post(`http://localhost:5000/expense/add?user=${currentUser._id}`, {...expense, currency: currentUser.currency});
+            const data = await axios.post(`${process.env.REACT_APP_BACKEND_API}/expense/add?user=${currentUser._id}`, {...expense, currency: currentUser.currency});
             
             setSuccess("Expense added successfully!")
 

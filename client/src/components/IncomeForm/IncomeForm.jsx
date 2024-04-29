@@ -28,7 +28,7 @@ const IncomeForm = ( { investment } ) => {
         }
 {}
         try {
-            const data = await axios.post(`http://localhost:5000/income/add?user=${currentUser._id}`, {...income, currency: currentUser.currency});
+            const data = await axios.post(`${process.env.REACT_APP_BACKEND_API}/income/add?user=${currentUser._id}`, {...income, currency: currentUser.currency});
             
             setSuccess("Income added successfully!")
 

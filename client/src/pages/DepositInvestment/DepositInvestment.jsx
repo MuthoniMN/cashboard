@@ -28,7 +28,7 @@ export default function DepositInvestment() {
         }
 {}
         try {
-            const data = await axios.put(`http://localhost:5000/investment/${id}?user=${currentUser._id}`, {...value});
+            const data = await axios.put(`${process.env.REACT_APP_BACKEND_API}/investment/${id}?user=${currentUser._id}`, {...value});
             
             setSuccess("Investment added successfully!")
 

@@ -25,7 +25,7 @@ const Header = ({title, desc}) => {
             setError("");
             setSuccess("");
             try {
-                const response = await axios.put(`http://localhost:5000/user/${currentUser._id}`, {currency: currency});
+                const response = await axios.put(`${process.env.REACT_APP_BACKEND_API}/user/${currentUser._id}`, {currency: currency});
                 setCurrentUser(response.data)
                 setSuccess("Currency updated!")
             } catch (err) {

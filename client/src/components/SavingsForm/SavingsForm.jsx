@@ -23,7 +23,7 @@ export default function SavingsForm(){
         }
 {}
         try {
-            const data = await axios.post(`http://localhost:5000/savings/add?user=${currentUser._id}`, {...savings, currency: currentUser.currency, currentAmount: 0});
+            const data = await axios.post(`${process.env.REACT_APP_BACKEND_API}/savings/add?user=${currentUser._id}`, {...savings, currency: currentUser.currency, currentAmount: 0});
             
             setSuccess("savings added successfully!")
 

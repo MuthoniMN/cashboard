@@ -28,7 +28,7 @@ export default function EditSaving() {
         }
 {}
         try {
-            const data = await axios.put(`http://localhost:5000/savings/${id}?user=${currentUser._id}`, {...value});
+            const data = await axios.put(`${process.env.REACT_APP_BACKEND_API}/savings/${id}?user=${currentUser._id}`, {...value});
             
             setSuccess("Savings updated successfully!")
 

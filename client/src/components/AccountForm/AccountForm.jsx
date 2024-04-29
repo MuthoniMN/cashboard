@@ -24,7 +24,7 @@ const AccountForm = () => {
         }
 
         try {
-            const data = await axios.post(`http://localhost:5000/account/add?user=${currentUser._id}`, {...account, currency: currentUser.currency});
+            const data = await axios.post(`${process.env.REACT_APP_BACKEND_API}/account/add?user=${currentUser._id}`, {...account, currency: currentUser.currency});
             
             setSuccess("Account added successfully!")
 

@@ -47,7 +47,7 @@ const Expenses = () => {
     })
 
     async function deleteExpense(id){
-        await deleteProperty(`http://localhost:5000/expense/${id}?user=${currentUser._id}`);
+        await deleteProperty(`${process.env.REACT_APP_BACKEND_API}/expense/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 

@@ -31,7 +31,7 @@ const Accounts = () => {
     };
 
     async function deleteAccount(id) {
-        await deleteProperty(`http://localhost:5000/account/${id}?user=${currentUser._id}`);
+        await deleteProperty(`${process.env.REACT_BACKEND_API}/account/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 
