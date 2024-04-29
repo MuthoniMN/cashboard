@@ -58,7 +58,6 @@ const Dashboard = () => {
     let index = accounts.findIndex(accounts => accounts._id === transaction.account);
     if (index === -1) {
       let acc = currentUser.accounts.find(account => account._id === transaction.account)
-      console.log(currentUser.accounts)
       if (acc) {
         accounts.push({
           ...acc,
@@ -69,7 +68,6 @@ const Dashboard = () => {
       accounts[index].transactions += 1;
     }
   })
-  console.log(accounts);
   return (
     <>
       <ContentLayout>
