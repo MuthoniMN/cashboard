@@ -1,3 +1,4 @@
+const { listenerCount } = require('../models/Expense');
 const User = require('../models/User');
 const mongoose = require('mongoose')
 const investmentController = {};
@@ -184,10 +185,12 @@ investmentController.deleteInvestment = async(req, res) => {
     session.startTransaction();
 
     try {
-        const user = await User.findById(userId).session(session);
+        let user = await User.findById(userId).session(session);
 
-        user.income.id(id).deleteOne();
+        user.investments.id(id).deleteOne();
         user.save({ session });
+
+        user = await User.findById(userId).session(session);
 
         user.transactions.pull({ typeId: id });
         user.save({ session });

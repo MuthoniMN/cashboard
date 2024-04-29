@@ -121,10 +121,12 @@ accountController.deleteAccount = async (req, res) => {
     session.startTransaction();
 
     try {
-        const user = await User.findById(userId).session(session);
+        let user = await User.findById(userId).session(session);
 
         user.accounts.id(id).deleteOne();
         user.save({ session });
+
+        user = await User.findById(userId).session(session);
 
         user.transactions.pull({ account: id });
         user.save({ session });

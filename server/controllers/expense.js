@@ -120,10 +120,12 @@ expenseController.deleteExpense = async(req, res) => {
     session.startTransaction();
 
     try {
-        const user = await User.findById(userId).session(session);
+        let user = await User.findById(userId).session(session);
 
         user.expenses.id(id).deleteOne();
         user.save({ session });
+
+        user = await User.findById(userId).session(session);
 
         user.transactions.pull({ typeId: id });
         user.save({ session });
