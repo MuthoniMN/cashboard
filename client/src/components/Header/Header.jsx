@@ -41,7 +41,7 @@ const Header = ({title, desc}) => {
     
     return (
         <header>
-            <div>
+            <div className="title_section">
                 <h2>{title}</h2>
                 <p>{desc}</p>
             </div>

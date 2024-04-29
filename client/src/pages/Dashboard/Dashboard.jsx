@@ -74,6 +74,7 @@ const Dashboard = () => {
     <>
       <ContentLayout>
         <Header title='Welcome back!' desc='Overview of your financial tracker.' />
+        <section className="dashboard">
         <section className="dashboard_hero">
           <section>
             <MiniCard heading={'Total Balance'} currency={currentUser.currency} value={currentUser.accounts} account />
@@ -84,6 +85,7 @@ const Dashboard = () => {
           <TopAccounts accounts={accounts.sort((a, b) => a.transactions - b.transactions).slice(0, 2)} />
         </section>
         <TransactionOverview transactions={transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))} />
+        </section>
       </ContentLayout>
 
       <Navigation links={navMenu} />

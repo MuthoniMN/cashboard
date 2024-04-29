@@ -1,4 +1,32 @@
+.expensesContainer{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 125px;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
 .expensesTable{
-    width:60%;
+    width: 100%;
     text-align: center;
+}
+
+.expensesTable>table td, 
+.expensesTable>table th{
+    min-width: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .expensesContainer{
+        flex-wrap: wrap;
+        left: 0;
+        top: 85px;
+    }
+
+    .expensesContainer>*{
+        width: 100%;
+    }
 }

@@ -60,7 +60,8 @@ const Expenses = () => {
     return (
         <>
         <Header title='Your Expenses' desc='An overview of your expenses.' />
-        <section style={{textAlign: 'left'}}>
+        <section className='expensesContainer' style={{textAlign: 'left'}}>
+            <div style={{marginTop: "85px", flexGrow: "3"}}>
             <button>
                 <Link to='/expenses/add'>Add an Expense</Link>
             </button>
@@ -71,7 +72,7 @@ const Expenses = () => {
                     <th>Desc</th>
                     <th>Category</th>
                     <th>Amount</th>
-                    <th>Delete</th>
+                    <th className='deleteColumn'>Delete</th>
                 </tr>
                 {pageData.map(expense =>{ 
                         let date = new Date(expense.date)
@@ -81,7 +82,7 @@ const Expenses = () => {
                         <td>{expense.desc}</td>
                         <td>{expense.category}</td>
                         <td>{expense.currency + " " + expense.amount}</td>
-                        <td>
+                        <td className='deleteColumn'>
                             <button className="deleteButton" onClick={() => deleteExpense(expense._id)}>
                                 <FaTrash />
                             </button>
@@ -96,7 +97,7 @@ const Expenses = () => {
             </table>
             <Pagination max={maxPerPage} total={expenses.length} paginate={paginate} back={back} forward={forward} />
             </section>
-            
+            </div>
             <Categories heading="Where did your money go?" categories={categories} />
         </section>
         </>

@@ -39,6 +39,11 @@ h1 {
   line-height: 1.1;
 }
 
+*{
+  scrollbar-color: #E5A4CB #59C3C3;
+  scrollbar-width: thin;
+}
+
 input[type=submit],
 button {
   border-radius: 8px;
@@ -84,6 +89,31 @@ input:focus{
   color: rgb(61, 255, 2);
   font-weight: 500;
 }
+
+.deleteButton{
+  background: rgb(231, 53, 53);
+}
+
+.deleteButton:hover{
+  background: rgb(214, 25, 25);
+  border-radius: 25px;
+}
+
+.deleteColumn{
+  min-width: 70px;
+  width: auto;
+}
+
+section.table_container{
+  width: 100%;
+  overflow-x: auto;
+  min-width: 600px;
+}
+
+table td, table th{
+  min-width: 250px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -1,12 +1,19 @@
+.dashboard{
+    overflow: auto;
+    height: 110%;
+}
+
 .dashboard_hero{
     display: flex;
     justify-content: space-around;
     gap: 24px;
     margin-top: 8px;
     height: fit-content;
+    flex-wrap: wrap;
 }
 .dashboard_hero>section{
     width: 30%;
+    min-width: 350px;
 }
 
 .overviews{
@@ -40,9 +47,7 @@
 
 .transactions{
     overflow: auto;
-    height: 40%;
-    scrollbar-color: #1D70A2 #59C3C3;
-    scrollbar-width: thin;
+    height: 400px;
 }
 
 .transactions>h2{
