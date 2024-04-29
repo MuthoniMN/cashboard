@@ -133,12 +133,12 @@ incomeController.deleteIncome = async (req, res) => {
         let user = await User.findById(userId).session(session);
 
         user.income.id(id).deleteOne();
-        user.save({ session });
+        await user.save({ session });
 
         user = await User.findById(userId).session(session);
 
         user.transactions.pull({ typeId: id });
-        user.save({ session });
+        await user.save({ session });
 
         session.commitTransaction();
         session.endSession();

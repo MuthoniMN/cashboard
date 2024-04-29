@@ -154,12 +154,12 @@ savingsController.deleteSaving = async (req, res) => {
         let user = await User.findById(userId).session(session);
 
         user.savings.pull({ _id: id  });
-        user.save({ session });
+        await user.save({ session });
 
         user = await User.findById(userId).session(session);
 
         user.transactions.pull({ typeId: id });
-        user.save({ session });
+        await user.save({ session });
 
         session.commitTransaction();
         session.endSession();
