@@ -1,33 +1,47 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Cashboard API Reference"
+description: "API Reference that describes all the available endpoints at Cashboard"
 ---
+Cashboard is a personal finance tool that helps users keep track of their income, expenses, savings and investments.
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+API URL: https://cashboard-f5x2.onrender.com
 
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+<CardGroup cols={3}>
+    <Card
+        title="User Endpoint"
+        icon="user"
+        href="/api-reference/user/introduction"
+    >
+  </Card>
+  <Card
+    title="Account Endpoint"
+    icon="credit-card"
+    href="/api-reference/account/introduction"
+  >
+  </Card>
+  <Card
+    title="Income Endpoint"
+    icon="wallet"
+    href="/api-reference/income/introduction"
+  >
+  </Card>
+  <Card
+    title="Expense Endpoint"
+    icon="receipt"
+    href="/api-reference/expense/introduction"
+  >
+  </Card>
+  <Card
+    title="Savings Endpoint"
+    icon="piggy-bank"
+    href="/api-reference/savings/introduction"
+  >
+  </Card>
+  <Card
+    title="Investments Endpoint"
+    icon="money-bill-trend-up"
+    href="/api-reference/user/update-user"
+  >
+  </Card>
+  
+</CardGroup>

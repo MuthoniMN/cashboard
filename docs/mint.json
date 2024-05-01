@@ -15,15 +15,16 @@
       "to": "#1D70A2"
     }
   },
+  "openapi": "/api-reference/openapi.yml",
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Contact Developer",
       "url": "mailto:hi@mintlify.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "View Demo",
+    "url": "https://cashboard-ucpq.onrender.com/"
   },
   "tabs": [
     {
@@ -58,34 +59,82 @@
       ]
     },
     {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "API Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        {
+          "group": "Users",
+          "pages": [
+            "api-reference/user/introduction",
+            "api-reference/user/user-details",
+            "api-reference/user/create-a-new-user",
+            "api-reference/user/update-user"
+          ]
+        },
+        {
+          "group": "Account",
+          "pages": [
+            "api-reference/account/introduction",
+            "api-reference/account/account",
+            "api-reference/account/all-accounts",
+            "api-reference/account/create-an-account",
+            "api-reference/account/update-account",
+            "api-reference/account/delete-account"
+          ]
+        },
+        {
+          "group": "Income",
+          "pages": [
+            "api-reference/income/introduction",
+            "api-reference/income/income-source",
+            "api-reference/income/all-income-sources",
+            "api-reference/income/create-an-income-source",
+            "api-reference/income/delete-income"
+          ]
+        },
+        {
+          "group": "Expenses",
+          "pages": [
+            "api-reference/expenses/introduction",
+            "api-reference/expenses/expense",
+            "api-reference/expenses/all-expenses",
+            "api-reference/expenses/create-an-expense",
+            "api-reference/expenses/delete-expense"
+          ]
+        },
+        {
+          "group": "Investments",
+          "pages": [
+            "api-reference/investments/introduction",
+            "api-reference/investments/investment",
+            "api-reference/investments/all-investments",
+            "api-reference/investments/create-an-investment",
+            "api-reference/investments/update-investment",
+            "api-reference/investments/delete-investment"
+          ]
+        },
+        {
+          "group": "Savings",
+          "pages": [
+            "api-reference/savings/introduction",
+            "api-reference/savings/saving",
+            "api-reference/savings/all-savings",
+            "api-reference/savings/create-a-saving",
+            "api-reference/savings/update-saving",
+            "api-reference/savings/delete-saving"
+          ]
+        }
       ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/codebymitch",
+    "github": "https://github.com/MuthoniMN",
+    "linkedin": "https://www.linkedin.com/in/michelle-ndiangui/"
   }
 }
