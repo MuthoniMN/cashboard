@@ -5,6 +5,7 @@ It is a personal finance tool that enables users to understand how they spend th
 
 ## Demo and Video
 ![](../demo/Dashboard.gif)
+
 [View Demo](https://cashboard-ucpq.onrender.com/)
 
 ## Tech Stack
