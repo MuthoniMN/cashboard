@@ -9,7 +9,7 @@ export default function SavingsCard({ saving }) {
     const { currentUser, setCurrentUser } = useContext(AuthContext);
 
     async function deleteSaving(id) {
-        await deleteProperty(`${process.env.REACT_APP_BACKEND_API}/savings/${id}?user=${currentUser._id}`);
+        await deleteProperty(`savings/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 
@@ -21,7 +21,7 @@ export default function SavingsCard({ saving }) {
             <p>Goal: {saving.goal}</p>
             <p>Amount: {saving.currentAmount}</p>
             <div className="barContainer">
-                <div className="bar" style={{width: `${(saving.currentAmount / saving.goal) * 100 }%`, height: '100%'}}>
+                <div className="bar" style={{ width: `${(saving.currentAmount / saving.goal) * 100}%`, height: '100%' }}>
                     {`${Math.round((saving.currentAmount / saving.goal) * 100)}%`}
                 </div>
             </div>

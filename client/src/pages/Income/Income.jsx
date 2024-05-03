@@ -33,7 +33,7 @@ const Income = () => {
     };
 
     async function deleteIncome(id) {
-        await deleteProperty(`${process.env.REACT_APP_BACKEND_API}/income/${id}?user=${currentUser._id}`);
+        await deleteProperty(`/income/${id}?user=${currentUser._id}`);
 
         let user = await updateCurrentUser(currentUser._id);
 
