@@ -77,7 +77,7 @@ const Income = () => {
                         })}
                         {income.length === 0 && (
                             <tr>
-                                <td colSpan={4}>No Accounts Added</td>
+                                <td colSpan={4}>No Income Sources Added</td>
                             </tr>
                         )}
                     </tbody>
