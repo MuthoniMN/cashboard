@@ -5,22 +5,29 @@ It is a personal finance tool that enables users to understand how they spend th
 
 ## Demo and Video
 ![](./demo/Dashboard.gif)
+
 [View Demo](https://cashboard-ucpq.onrender.com/)
 
 [View Documentation](https://mitchsorg.mintlify.app/)
 
 ## App Features
 - Authetication and Authorization
+
 ![](./demo/Auth.gif)
 - Account Tracker
+
 ![](./demo/Accounts.gif)
 - Income Tracker
+
 ![](./demo/Income.gif)
 - Expense Tracker
+
 ![](./demo/Expenses.gif)
 - Savings Tracker
+
 ![](./demo/Savings.gif)
 - Investment Tracker
+
 ![](./demo/Investments.gif)
 
 ## Tech Stack
