@@ -1,8 +1,42 @@
-# React + Vite
+# Cashboard App
+Cashboard is an application that helps users keep track of their income, expenses, savings and investments.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+It is a personal finance tool that enables users to understand how they spend their money
 
-Currently, two official plugins are available:
+## Demo and Video
+![](../demo/Dashboard.gif)
+[View Demo](https://cashboard-ucpq.onrender.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React
+- Vanilla CSS
+- Material UI Charts
+
+## How to Set It Up Locally
+1. Create a directory 
+``` 
+mkdir project-new
+ ```
+2. Clone the GitHub repository
+``` 
+git clone https://github.com/MuthoniMN/cashboard/ 
+```
+3. Create `.env` files for the client directory.
+
+### Environment Variables
+1. Create an `.env` file in the `client` directory.
+2. Use the `.env.example` as a template
+3. Go to [FreeCurrencyAPI](https://freecurrencyapi.com/) and get an API key.
+4. Change the API url to `http://localhost:5000`
+
+## How to Run the App
+> Make sure you set up the backend environment before you run the app
+1. Install the dependencies for the frontend
+```
+cd client/
+npm install
+```
+2. Run the frontend
+```
+npm run dev
+```
